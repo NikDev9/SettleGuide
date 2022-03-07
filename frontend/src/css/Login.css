@@ -1,0 +1,17 @@
+.Login {
+    display: flex;
+    color: white;
+    background: #6b5b95;
+  }
+  
+  .appAside {
+    width: 50%;
+    background-color: #6b5b95;
+  }
+  
+  .appForm {
+    margin: auto;
+    background-color: #12130f;
+    padding: 25px 40px;
+    overflow: auto;
+  }

@@ -1,0 +1,13 @@
+.Home {
+    background: #6b5b95;
+    min-height: 100vh;
+}
+
+.cardStyle {
+    width: 80%;
+    margin: 10%;
+}
+
+.Row {
+    margin: auto;
+}

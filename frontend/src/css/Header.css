@@ -1,0 +1,8 @@
+.Header {
+    background: blue;
+    width: 100%;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
