@@ -1,6 +1,8 @@
 .Home {
     background: #6b5b95;
     min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .cardStyle {
