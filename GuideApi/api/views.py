@@ -41,29 +41,35 @@ def ReadData(request):
     uda = dataRef.child('user').get().val()
     return JsonResponse(uda, safe=False)
 
+@api_view(['POST'])
+@csrf_exempt
+def signIn(request):
+    email = request.data['email']
+    password = request.data['password']
+    try:
+        # if there is no error then signin the user with given email and password
+        user = auth.sign_in_with_email_and_password(email,password)
+        return Response({"userId":user['idToken']})
+    except:
+        return Response({"userId":''})
+
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def UserData(request):
     if request.method == 'GET':
-        # udata = User.objects.all()
-
-
-        # return JsonResponse(serializer.data, safe=False)
-
         users_ref = dataRef.child('user/')
         user_data = users_ref.get().val()
-        #serializer = UserSerializer(user_data, many=True)
-
         return Response(user_data)
 
     elif request.method == 'POST':
-
         username = request.data['username']
         email = request.data['email']
         password = request.data['password']
+        uni = request.data['university']
+        dept = request.data['dept']
+        major = request.data['major']
         isAdmin = 0
-
-        postdata = {'email': f'{email}', 'isAdmin': isAdmin, 'password': f'{password}', 'username': f'{username}'}
+        postdata = {'email': f'{email}', 'isAdmin': isAdmin, 'password': f'{password}', 'username': f'{username}', 'university': f'{uni}', 'dept': f'{dept}', 'major': f'{major}'}
         
         users_ref = dataRef.child('user/')
         users_ref.push(postdata)
@@ -71,12 +77,9 @@ def UserData(request):
         #     'username': f"{username}",
         #     'email': f"{email}",
         #     'password': f"{password}"
-        # })
-            
+        # }) 
         return Response(status=status.HTTP_201_CREATED)
             
-        #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def getHomeData(request):
@@ -86,4 +89,12 @@ def getHomeData(request):
 
         return Response(home_data)
 
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def getCommunityData(request):
+    if request.method == 'GET':
+        home_ref = dataRef.child('community/')
+        home_data = home_ref.get().val()
+
+        return Response(home_data)
     

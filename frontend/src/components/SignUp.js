@@ -1,67 +1,61 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import '../css/SignUp.css';
 import { USER_URL } from "../constants";
 import axios from 'axios';
 
-class SignUp extends Component {
-  constructor() {
-    super();
+const SignUp = () => {
 
-    this.state = {
+    const [user, setUser] = useState({
       email: "",
       password: "",
       username: "",
+      university: "",
+      dept: "",
+      major: "",
       isAdmin: 0
-    };
+    });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    //this.componentDidMount = this.componentDidMount.bind(this);
-  }
+  const dept = ['Arts and Sciences', 'Engineering', 'Fine arts', 'Business', 'Education', 'Communication', 'Health sciences', 'Social Work', 'Theatre'];
 
-  componentDidMount() {
+  const fetchData = async() => {
 
-    axios.get(USER_URL)
+    await axios.get(USER_URL)
       .then(res => {
         console.log(res.data)
       })
 
-    axios.post(USER_URL, this.state)
+    await axios.post(USER_URL, user)
     .then(res => {
-        this.setState({
-            data: this.state
-        })
-        console.log('componentDidMount', this.state);
+        // this.setState({
+        //     data: state
+        // })
+        console.log('componentDidMount', user);
     })
   }
 
-  handleChange(event) {
+  const handleChange = (event) => {
     let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.value;
     let name = target.name;
 
-    this.setState({
+    setUser({
+      ...user,
       [name]: value
     });
   }
 
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
+
     e.preventDefault();
-
-    console.log(this.state);
-    this.componentDidMount();
-
-    console.log("The form was submitted with the following data:");
-    console.log('handleSubmit', this.state);
+    fetchData();
+    console.log('handleSubmit', user);
   }
-
-  render() {
     return (
       <div className="SignUp">
         <div className="appForm">
       <div className="formCenter">
-        <form onSubmit={this.handleSubmit} className="formFields">
+        <form onSubmit={handleSubmit} className="formFields">
           <div className="formField">
             <label className="formFieldLabel" htmlFor="username">
               Full Name
@@ -72,8 +66,8 @@ class SignUp extends Component {
               className="formFieldInput"
               placeholder="Enter your full name"
               name="username"
-              value={this.state.username}
-              onChange={this.handleChange}
+              value={user.username}
+              onChange={handleChange}
             />
           </div>
           <div className="formField">
@@ -82,12 +76,11 @@ class SignUp extends Component {
             </label>
             <input
               type="password"
-              id="password"
               className="formFieldInput"
               placeholder="Enter your password"
               name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
+              value={user.password}
+              onChange={handleChange}
             />
           </div>
           <div className="formField">
@@ -96,26 +89,59 @@ class SignUp extends Component {
             </label>
             <input
               type="email"
-              id="email"
               className="formFieldInput"
               placeholder="Enter your email"
               name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
+              value={user.email}
+              onChange={handleChange}
             />
           </div>
-
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="university">
+              University/College
+            </label>
+            <input
+              type="text"
+              className="formFieldInput"
+              placeholder="Enter your university/college name"
+              name="university"
+              value={user.university}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="formField">
+            <label className= "formFieldLabel" htmlFor="department">
+              Department
+            </label>
+            <select name="dept" onChange={handleChange}>
+              {dept.map((dt) => 
+              <option value={dt}>{dt}</option>
+              )}
+            </select>
+          </div>
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="major">
+              Major
+            </label>
+            <input
+              type="text"
+              className="formFieldInput"
+              placeholder="Enter your major"
+              name="major"
+              value={user.major}
+              onChange={handleChange}
+            />
+          </div>
           <div className="formField">
             <button className="formFieldButton">Sign Up</button>{" "}
-            <Link to="/sign-in" className="formFieldLink">
-              I'm already member
-            </Link>
           </div>
+          <Link to="/sign-in" className="formFieldLink">
+            I'm already member
+          </Link>
         </form>
       </div>
       </div>
       </div>
     );
   }
-}
 export default SignUp;

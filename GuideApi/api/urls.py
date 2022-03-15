@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import HomeViewSet, UserViewSet
 from rest_framework.routers import DefaultRouter
-from .views import UserData, ReadData, getHomeData
+from .views import UserData, ReadData, getHomeData, getCommunityData, signIn
 
 router = DefaultRouter()
 # router.register('users', UserViewSet, basename='users')
@@ -13,5 +13,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('users/', UserData),
     path('home/', getHomeData),
+    path('community/', getCommunityData),
+    path('signin/', signIn),
     path('api-auth/', include('rest_framework.urls'))
 ]

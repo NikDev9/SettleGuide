@@ -32,17 +32,17 @@ export default class Header extends Component {
           <div className='collapse navbar-collapse' id='navbarExample01'>
             <MDBNavbarNav right className='mb-2 mb-lg-0'>
               <MDBNavbarItem active>
-                <MDBNavbarLink className="item" aria-current='page' href='#'>
+                <MDBNavbarLink className="item" aria-current='page' href='/'>
                   Home
                 </MDBNavbarLink>
               </MDBNavbarItem>
+              {/* <MDBNavbarItem>
+                <MDBNavbarLink className="pink-text" href='/connect'>Connect</MDBNavbarLink>
+              </MDBNavbarItem> */}
               <MDBNavbarItem>
-                <MDBNavbarLink className="pink-text" href='/sign-in'>Connect</MDBNavbarLink>
+                <MDBNavbarLink className="item" href='/community'>Community</MDBNavbarLink>
               </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink className="item" href='#'>Community</MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
+              {/* <MDBNavbarItem>
                 <MDBNavbarLink className="item" href='#'>Event</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
@@ -50,7 +50,7 @@ export default class Header extends Component {
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <MDBNavbarLink className="item" href='#'>Articles</MDBNavbarLink>
-              </MDBNavbarItem>
+              </MDBNavbarItem> */}
             </MDBNavbarNav>
           </div>
           </div>

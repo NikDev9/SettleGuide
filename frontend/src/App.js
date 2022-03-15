@@ -7,6 +7,7 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Header from "./components/Header";
 import Random from "./components/Random";
+import Community from "./components/Community";
 
 class App extends Component {
   render() {
@@ -14,8 +15,8 @@ class App extends Component {
       <Router>
         <div className="App">
             <Routes>
-            <Route exact path="/home" element={<Home/>} />
             <Route exact path="/" element={<Home/>} />
+            <Route exact path="/community" element={<Community/>} />
             <Route exact path="/sign-in" element={<Login/>} />
             <Route exact path="/sign-up" element={<SignUp/>} />
             </Routes>

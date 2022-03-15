@@ -1,44 +1,50 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 import '../css/Login.css';
+import axios from 'axios';
+import { SIGNIN_URL } from "../constants";
+import { useNavigate } from 'react-router-dom';
 
-class Login extends Component {
-  constructor() {
-    super();
+const Login = (props) => {
 
-    this.state = {
-      email: "",
-      password: ""
-    };
+  const nav = useNavigate();
+  const [userProfile, setUser] = useState({
+    email: "",
+    password: ""
+  });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
+  const handleChange = (event) => {
     let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.value;
     let name = target.name;
 
-    this.setState({
+    setUser({
+      ...userProfile,
       [name]: value
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  const fetchData = async() => {
 
-    console.log("The form was submitted with the following data:");
-    console.log(this.state);
+    await axios.post(SIGNIN_URL, userProfile)
+    .then(res => {
+         console.log('okay', res);
+         if(res.data.userId != '')
+          nav('/')
+    })
   }
 
-  render() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetchData();
+  }
+
     return (
       <div className="Login">
-        {/* <div className="appAside" /> */}
+        <div className="appAside" />
         <div className="appForm">
       <div className="formCenter">
-        <form className="formFields" onSubmit={this.handleSubmit}>
+        <form className="formFields" onSubmit={handleSubmit}>
           <div className="formField">
             <label className="formFieldLabel" htmlFor="email">
               E-Mail Address
@@ -49,8 +55,8 @@ class Login extends Component {
               className="formFieldInput"
               placeholder="Enter your email"
               name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
+              value={userProfile.email}
+              onChange={handleChange}
             />
           </div>
 
@@ -64,8 +70,8 @@ class Login extends Component {
               className="formFieldInput"
               placeholder="Enter your password"
               name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
+              value={userProfile.password}
+              onChange={handleChange}
             />
           </div>
 
@@ -81,7 +87,6 @@ class Login extends Component {
       </div>
       </div>
     );
-  }
 }
 
 export default Login;

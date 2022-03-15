@@ -14,3 +14,7 @@ class Home(models.Model):
     img = models.CharField(max_length=100)
     info = models.CharField(max_length=100, default="djhfskdhf")
     link = models.CharField(max_length=100)
+
+class Community(models.Model):
+    channel = models.CharField(max_length=100)
+    admin = models.IntegerField(default=0)
