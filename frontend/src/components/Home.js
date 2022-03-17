@@ -50,11 +50,11 @@ const Home = () => {
                         <Col>
                             <Card className="cardStyle" key={card.heading}>
                             <Card.Body>
-                                <Card.Img src={card.img} />
+                                {/* <Card.Img src={card.img} /> */}
                                 <Card.Title>{card.heading}</Card.Title>
                                 <Card.Text>{card.info}
                                 </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
+                                <button className="clickButton">See more</button>
                             </Card.Body>
                             </Card>
                         </Col>

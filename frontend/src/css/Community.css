@@ -47,7 +47,7 @@
   border: none;
 }
 .appAside {
-    background-color: black;
+    background-color: #6b5b95;
     left: 0;
     float: left;
     width: 40%;
@@ -165,19 +165,20 @@ img{ max-width:100%;}
 .received_withd_msg { width: 57%;}
 .mesgs {
   float: left;
+  height: 100vh;
   padding: 30px 15px 0 25px;
   width: 60%;
 }
 
  .sent_msg p {
-  background: #05728f none repeat scroll 0 0;
+  background: #6b5b95 none repeat scroll 0 0;
   border-radius: 3px;
   font-size: 14px;
   margin: 0; color:#fff;
   padding: 5px 10px 5px 12px;
   width:100%;
 }
-.outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
+.outgoing_msg{ overflow:hidden; margin:26px 5% 26px;}
 .sent_msg {
   float: right;
   width: 46%;
@@ -191,22 +192,49 @@ img{ max-width:100%;}
   width: 100%;
 }
 
-.type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+.type_msg {border-top: 1px solid #c4c4c4; position: sticky; bottom: 1%; background: white;}
 .msg_send_btn {
-  background: #05728f none repeat scroll 0 0;
+  background: #6b5b95 none repeat scroll 0 0;
   border: medium none;
-  border-radius: 50%;
+  border-radius: 10%;
   color: #fff;
   cursor: pointer;
   font-size: 17px;
   height: 33px;
   position: absolute;
-  right: 0;
+  bottom: 0;
+  right: 5%;
   top: 11px;
-  width: 33px;
 }
 .messaging { padding: 0 0 50px 0;}
 .msg_history {
-  height: 516px;
-  overflow-y: auto;
+  height: 80% !important;
+  overflow-y: scroll;
+}
+
+.msgs {
+  /* height: 100% !important; */
+  /* overflow-y: scroll; */
+}
+
+.chnlHead {
+  color: white;
+  padding: 2%;
+  text-align: center;
+}
+
+.joinComm {
+  color: white;
+  background: black;
+  position: relative;
+  left: 40%;
+  padding: 4%;
+  border-radius: 3%;
+}
+
+.channelHead {
+  border: solid 2px;
+  padding: 2%;
+  background: black;
+  color: white;
 }

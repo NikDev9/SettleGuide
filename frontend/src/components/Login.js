@@ -4,11 +4,12 @@ import '../css/Login.css';
 import axios from 'axios';
 import { SIGNIN_URL } from "../constants";
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const Login = (props) => {
 
   const nav = useNavigate();
-  const [userProfile, setUser] = useState({
+  const [user, setUser] = useState({
     email: "",
     password: ""
   });
@@ -19,16 +20,18 @@ const Login = (props) => {
     let name = target.name;
 
     setUser({
-      ...userProfile,
+      ...user,
       [name]: value
     });
   }
 
   const fetchData = async() => {
 
-    await axios.post(SIGNIN_URL, userProfile)
+    await axios.post(SIGNIN_URL, user)
     .then(res => {
-         console.log('okay', res);
+         Cookies.set("userId", res.data.userId);
+         Cookies.set("firstname", res.data.name);         
+         console.log('cookie login: ', Cookies.get("userId"));
          if(res.data.userId != '')
           nav('/')
     })
@@ -55,7 +58,7 @@ const Login = (props) => {
               className="formFieldInput"
               placeholder="Enter your email"
               name="email"
-              value={userProfile.email}
+              value={user.email}
               onChange={handleChange}
             />
           </div>
@@ -70,7 +73,7 @@ const Login = (props) => {
               className="formFieldInput"
               placeholder="Enter your password"
               name="password"
-              value={userProfile.password}
+              value={user.password}
               onChange={handleChange}
             />
           </div>

@@ -3,13 +3,17 @@ import { Link } from "react-router-dom";
 import '../css/SignUp.css';
 import { USER_URL } from "../constants";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 
+  var alert = false;
+  const nav = useNavigate();
     const [user, setUser] = useState({
       email: "",
       password: "",
-      username: "",
+      firstname: "",
+      lastname: "",
       university: "",
       dept: "",
       major: "",
@@ -27,11 +31,26 @@ const SignUp = () => {
 
     await axios.post(USER_URL, user)
     .then(res => {
-        // this.setState({
-        //     data: state
-        // })
-        console.log('componentDidMount', user);
+        if(res.data.userId != '')
+          nav('/')
+        else {
+          alert = true;
+          console.log('no user id');
+          showAlert();
+        }
     })
+  }
+
+  const showAlert = () => {
+    console.log('alert function');
+    if(alert) {
+      console.log('alert function true');
+      return (
+        <div className="alert">
+          <p>This is a danger alert—check it out!</p>
+        </div>
+      );
+    }
   }
 
   const handleChange = (event) => {
@@ -52,21 +71,32 @@ const SignUp = () => {
     console.log('handleSubmit', user);
   }
     return (
-      <div className="SignUp">
-        <div className="appForm">
+      <div className="appForm">
       <div className="formCenter">
         <form onSubmit={handleSubmit} className="formFields">
           <div className="formField">
-            <label className="formFieldLabel" htmlFor="username">
-              Full Name
+            <label className="formFieldLabel" htmlFor="firstname">
+              First Name
             </label>
             <input
               type="text"
-              id="username"
               className="formFieldInput"
-              placeholder="Enter your full name"
-              name="username"
-              value={user.username}
+              placeholder="Enter your first name"
+              name="firstname"
+              value={user.firstname}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="lastname">
+              Last Name
+            </label>
+            <input
+              type="text"
+              className="formFieldInput"
+              placeholder="Enter your last name"
+              name="lastname"
+              value={user.lastname}
               onChange={handleChange}
             />
           </div>
@@ -139,7 +169,9 @@ const SignUp = () => {
             I'm already member
           </Link>
         </form>
-      </div>
+        <div>
+          {showAlert()}
+          </div>
       </div>
       </div>
     );

@@ -47,9 +47,12 @@ def signIn(request):
     email = request.data['email']
     password = request.data['password']
     try:
-        # if there is no error then signin the user with given email and password
         user = auth.sign_in_with_email_and_password(email,password)
-        return Response({"userId":user['idToken']})
+        uid = user['localId']
+        users_ref = dataRef.child('user/'f'{uid}')
+        user_data = users_ref.get().val()
+        name = user_data['firstname']
+        return Response({"userId": uid, "name": name})
     except:
         return Response({"userId":''})
 
@@ -62,23 +65,30 @@ def UserData(request):
         return Response(user_data)
 
     elif request.method == 'POST':
-        username = request.data['username']
+        firstname = request.data['firstname']
+        lastname = request.data['lastname']
         email = request.data['email']
         password = request.data['password']
         uni = request.data['university']
         dept = request.data['dept']
         major = request.data['major']
         isAdmin = 0
-        postdata = {'email': f'{email}', 'isAdmin': isAdmin, 'password': f'{password}', 'username': f'{username}', 'university': f'{uni}', 'dept': f'{dept}', 'major': f'{major}'}
+        postdata = {'email': f'{email}', 'isAdmin': isAdmin, 'password': f'{password}', 'firstname': f'{firstname}', 'lastname': f'{lastname}', 'university': f'{uni}', 'dept': f'{dept}', 'major': f'{major}'}
         
-        users_ref = dataRef.child('user/')
-        users_ref.push(postdata)
+        try:
+            user = auth.create_user_with_email_and_password(email,password)
+            userId = user['localId']
+            users_ref = dataRef.child('user/'f'{userId}')
+            #users_ref.push(postdata)
+            users_ref.set(postdata)
+            return Response({'userId': userId})
+        except:
+            return Response({'userId': ''})
         # users_ref.update({
         #     'username': f"{username}",
         #     'email': f"{email}",
         #     'password': f"{password}"
         # }) 
-        return Response(status=status.HTTP_201_CREATED)
             
 @api_view(['GET', 'POST'])
 @csrf_exempt
@@ -92,9 +102,36 @@ def getHomeData(request):
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def getCommunityData(request):
-    if request.method == 'GET':
-        home_ref = dataRef.child('community/')
-        home_data = home_ref.get().val()
+    if request.method == 'POST':
+        userId = request.data['userId']
+        comm_ref = dataRef.child('user/'f'{userId}''/community/')
+        comm_data = comm_ref.get().val()
 
-        return Response(home_data)
+        return Response(comm_data)
+        
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def getChannelData(request):
+    if request.method == 'POST':
+        id = request.data['id']
+        channel_ref = dataRef.child('community/'f'{id}')
+        channel_data = channel_ref.get().val()
+
+        return Response(channel_data)
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def sendMsg(request):
+    if request.method == 'POST':
+        msg = request.data['msg']
+        channelId = request.data['channel']
+        msgId = request.data['totalMsg']
+        time = request.data['time']
+        name = request.data['name']
+        userId = request.data['userId']
+        postdata = {'msg': msg, 'time': time, 'userId': userId, 'username': name}
+        channel_ref = dataRef.child('community/'f'{channelId}''/messages/'f'{msgId}')
+        channel_data = channel_ref.set(postdata)
+
+        return Response(channel_data)
     

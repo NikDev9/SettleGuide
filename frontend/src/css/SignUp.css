@@ -16,3 +16,7 @@
   padding: 25px 40px;
   overflow: auto;
 }
+
+.alert {
+  color: white;
+}

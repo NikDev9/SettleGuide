@@ -1,9 +1,13 @@
 .Header {
-    background: purple;
+    background: #6b5b95;
     color: white;
     width: 100%;
 }
 
 .navbar-light .navbar-nav .nav-link {
+    color: white !important;
+}
+
+.item {
     color: white;
 }
