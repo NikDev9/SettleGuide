@@ -30,10 +30,11 @@ const Login = (props) => {
     await axios.post(SIGNIN_URL, user)
     .then(res => {
          Cookies.set("userId", res.data.userId);
-         Cookies.set("firstname", res.data.name);         
+         Cookies.set("firstname", res.data.name);
+         Cookies.set("isAdmin", res.data.admin);      
          console.log('cookie login: ', Cookies.get("userId"));
          if(res.data.userId != '')
-          nav('/')
+          nav('/home')
     })
   }
 
@@ -47,6 +48,7 @@ const Login = (props) => {
         <div className="appAside" />
         <div className="appForm">
       <div className="formCenter">
+        <h2 className="loginHeading">Login</h2>
         <form className="formFields" onSubmit={handleSubmit}>
           <div className="formField">
             <label className="formFieldLabel" htmlFor="email">
@@ -79,9 +81,9 @@ const Login = (props) => {
           </div>
 
           <div className="formField">
-            <button className="formFieldButton">Sign In</button>{" "}
-            <Link to="/" className="formFieldLink">
-              Create an account
+            <button className="formFieldButton buttonM">Sign In</button>{" "}
+            <Link to="/sign-up" className="formFieldLink textCenter">
+              Don't have an account? Create one
             </Link>
           </div>
 

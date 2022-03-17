@@ -7,7 +7,6 @@ import { ListGroup } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import OutgoingMsg from './OutgoingMsg';
 import IncomingMsg from './IncomingMsg';
-import Axios from  'axios-observable';
 
 const Community = () => {
 
@@ -46,18 +45,19 @@ const Community = () => {
   const getChannelData = (id, name) => {
     setShow(true);
     console.log('channel data', id);
+    console.log('show', show);
     const req = {"id": id};
     setChannel(id);
     setChannelName(name);
-    //axios.post(COMM_MSG_URL, req)
-    Axios.post(COMM_MSG_URL, req)
-    .subscribe(
+    axios.post(COMM_MSG_URL, req)
+    .then(
       res => {console.log('comm_msg', res.data.messages);
       setMsg(res.data.messages);
       settotalMsg(res.data.messages.length);
-    },
-      error => console.log(error)
-    );
+      var objDiv = document.getElementById("msgDiv");
+      objDiv.scrollTop = objDiv.scrollHeight;
+      //chatRoom();
+    });
     // .then(res => {
     //   //const messages = useObservableSuspense(res.data.messages);
     //   setMsg(res.data.messages);
@@ -69,7 +69,7 @@ const Community = () => {
   const showMsg = (msg) => {
 
     if(msg.userId != userId)
-      return <IncomingMsg msg={msg.msg} time={msg.time} />;
+      return <IncomingMsg msg={msg.msg} time={msg.time} username={msg.username} />;
     else
       return <OutgoingMsg msg={msg.msg} time={msg.time} />;
   }
@@ -84,11 +84,14 @@ const Community = () => {
     .then(res => {
       console.log('message sent');
       setuserMsg('');
+      getChannelData(channel, channelName);
     });
   }
 
   const chatRoom = () => {
+    console.log('chatroom')
     if(show) {
+      console.log('chatroom1')
       return (
       // <div class="chatRoom">
       //   <div className="room-chat">
@@ -100,8 +103,8 @@ const Community = () => {
       //   </form>
       //   </div> 
       <div className="mesgs">
-          <div className="msg_history">
-          <h3 className="channelHead">{channelName}</h3>
+        <h3 className="channelHead">{channelName}</h3>
+          <div className="msg_history" id="msgDiv">
             <div className='msgs'>
             {messages.map((msg) =>
               <div>
@@ -112,7 +115,7 @@ const Community = () => {
           </div>
           <div class="type_msg">
             <div class="input_msg_write">
-              <input type="text" value={userMsg} class="write_msg" placeholder="Type a message" onChange={handleChange} />
+              <input type="text" value={userMsg} className="write_msg" placeholder="Type a message" onChange={handleChange} />
               <button class="msg_send_btn" type="button" onClick={() => sendMsg()}>Send</button>
             </div>
           </div>
@@ -121,6 +124,7 @@ const Community = () => {
     }
     else
     {
+      console.log('chatroom2')
       return (
         <div class="mesgs">
         <button className="joinComm" type="button">Click here to join community channels</button>
@@ -140,6 +144,7 @@ const Community = () => {
                 <ListGroup.Item action onClick={() => getChannelData(channel.channelId, channel.name)}>
                   <div className="ms-2 me-auto">
                     <div className="fw-bold">{channel.name}</div>
+                    {channel.info}
                   </div>
                 </ListGroup.Item>
               )}

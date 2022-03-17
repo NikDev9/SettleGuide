@@ -4,6 +4,7 @@ import '../css/SignUp.css';
 import { USER_URL } from "../constants";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const SignUp = () => {
 
@@ -24,18 +25,21 @@ const SignUp = () => {
 
   const fetchData = async() => {
 
-    await axios.get(USER_URL)
-      .then(res => {
-        console.log(res.data)
-      })
+    // await axios.get(USER_URL)
+    //   .then(res => {
+    //     console.log(res.data)
+    //   })
 
     await axios.post(USER_URL, user)
     .then(res => {
-        if(res.data.userId != '')
-          nav('/')
+        if(res.data.userId != '') {
+          Cookies.set("userId", res.data.userId);
+          Cookies.set("firstname", res.data.name);
+          Cookies.set("isAdmin", res.data.admin);
+          nav('/home')
+        }
         else {
           alert = true;
-          console.log('no user id');
           showAlert();
         }
     })
@@ -44,12 +48,7 @@ const SignUp = () => {
   const showAlert = () => {
     console.log('alert function');
     if(alert) {
-      console.log('alert function true');
-      return (
-        <div className="alert">
-          <p>This is a danger alert—check it out!</p>
-        </div>
-      );
+      alert("The account already exists");
     }
   }
 
@@ -71,7 +70,9 @@ const SignUp = () => {
     console.log('handleSubmit', user);
   }
     return (
+      <div className="SignUp">
       <div className="appForm">
+      <h2 className="signupHeading">SIGNUP</h2>
       <div className="formCenter">
         <form onSubmit={handleSubmit} className="formFields">
           <div className="formField">
@@ -143,7 +144,7 @@ const SignUp = () => {
             <label className= "formFieldLabel" htmlFor="department">
               Department
             </label>
-            <select name="dept" onChange={handleChange}>
+            <select name="dept" className="selectDept" onChange={handleChange}>
               {dept.map((dt) => 
               <option value={dt}>{dt}</option>
               )}
@@ -163,15 +164,16 @@ const SignUp = () => {
             />
           </div>
           <div className="formField">
-            <button className="formFieldButton">Sign Up</button>{" "}
+            <button className="formFieldButton buttonM">Sign Up</button>{" "}
           </div>
-          <Link to="/sign-in" className="formFieldLink">
+          <Link to="/sign-in" className="formFieldLink textCenter">
             I'm already member
           </Link>
         </form>
         <div>
           {showAlert()}
           </div>
+      </div>
       </div>
       </div>
     );

@@ -20,3 +20,27 @@
 .alert {
   color: white;
 }
+
+.signupHeading {
+  color: white;
+  margin-bottom: 30%;
+  text-align: center;;
+}
+
+.selectDept {
+  padding: 3%;
+  width: 100%;
+}
+
+.buttonM {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.textCenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; 
+}

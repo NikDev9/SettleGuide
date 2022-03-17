@@ -235,6 +235,15 @@ img{ max-width:100%;}
 .channelHead {
   border: solid 2px;
   padding: 2%;
+  margin-bottom: 5%;
   background: black;
   color: white;
+}
+
+.write_msg {
+  padding: 2%;
+}
+
+.username {
+  font-weight: bold;
 }

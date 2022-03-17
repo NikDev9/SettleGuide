@@ -1,4 +1,5 @@
 import imp
+from telnetlib import STATUS
 from django.shortcuts import render, HttpResponse
 from .models import User
 from .models import Home
@@ -52,7 +53,8 @@ def signIn(request):
         users_ref = dataRef.child('user/'f'{uid}')
         user_data = users_ref.get().val()
         name = user_data['firstname']
-        return Response({"userId": uid, "name": name})
+        admin = user_data['isAdmin']
+        return Response({"userId": uid, "name": name, "isAdmin": admin})
     except:
         return Response({"userId":''})
 
@@ -79,9 +81,8 @@ def UserData(request):
             user = auth.create_user_with_email_and_password(email,password)
             userId = user['localId']
             users_ref = dataRef.child('user/'f'{userId}')
-            #users_ref.push(postdata)
             users_ref.set(postdata)
-            return Response({'userId': userId})
+            return Response({'userId': userId, 'name': firstname, 'isAdmin': 0})
         except:
             return Response({'userId': ''})
         # users_ref.update({
@@ -134,4 +135,33 @@ def sendMsg(request):
         channel_data = channel_ref.set(postdata)
 
         return Response(channel_data)
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def createCommunity(request):
+    if request.method == 'POST':
+        msg = request.data['msg']
+        name = request.data['name']
+        info = request.data['info']
+        time = request.data['time']
+        userId = request.data['userId']
+        postdata = {'adminId': userId, 'name': name, 'lastMsg': msg, 'info': info}
+        postdata2 = {'msg': msg, 'time': time, 'userId': userId, 'username': name}
+        comm_ref = dataRef.child('community/')
+        data1 = comm_ref.get().val()
+        len1 = len(data1)
+        comm_ref2 = dataRef.child('community/'f'{len1}')
+        comm_ref2.set(postdata)
+        
+        commMsg_ref = dataRef.child('community/'f'{len1}''/messages/0')
+        commMsg_ref.set(postdata2)
+
+        userComm_ref = dataRef.child('user/'f'{userId}''/community/')
+        data2 = userComm_ref.get().val()
+        len2 = len(data2)
+        postdata3 = {'info': info, 'channelId': len1, 'name': name}
+        userComm_ref2 = dataRef.child('user/'f'{userId}''/community/'f'{len2}')
+        userComm_ref2.set(postdata3)
+
+        return Response(STATUS)
     

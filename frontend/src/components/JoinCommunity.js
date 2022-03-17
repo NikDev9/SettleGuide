@@ -1,0 +1,5 @@
+const JoinCommunity = () => {
+    const fetchCommunity = () => {
+        
+    }
+}
