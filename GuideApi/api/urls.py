@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import HomeViewSet, UserViewSet
 from rest_framework.routers import DefaultRouter
-from .views import UserData, ReadData, getHomeData, getCommunityData, signIn, getChannelData, sendMsg, createCommunity
+from .views import UserData, ReadData, getHomeData, getCommunityData, signIn, getChannelData, sendMsg, createCommunity, fetchAllComm, joinRequest
 
 router = DefaultRouter()
 # router.register('users', UserViewSet, basename='users')
@@ -16,6 +16,8 @@ urlpatterns = [
     path('community/', getCommunityData),
     path('channel/', getChannelData),
     path('createcomm/', createCommunity),
+    path('fetchallcomm/', fetchAllComm),
+    path('joinrequest/', joinRequest),
     path('sendmsg/', sendMsg),
     path('signin/', signIn),
     path('api-auth/', include('rest_framework.urls'))

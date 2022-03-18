@@ -145,14 +145,14 @@ def createCommunity(request):
         info = request.data['info']
         time = request.data['time']
         userId = request.data['userId']
-        postdata = {'adminId': userId, 'name': name, 'lastMsg': msg, 'info': info}
-        postdata2 = {'msg': msg, 'time': time, 'userId': userId, 'username': name}
         comm_ref = dataRef.child('community/')
         data1 = comm_ref.get().val()
         len1 = len(data1)
+        postdata = {'adminId': userId, 'name': name, 'info': info, 'chId': len1}
         comm_ref2 = dataRef.child('community/'f'{len1}')
         comm_ref2.set(postdata)
         
+        postdata2 = {'msg': msg, 'time': time, 'userId': userId, 'username': name}
         commMsg_ref = dataRef.child('community/'f'{len1}''/messages/0')
         commMsg_ref.set(postdata2)
 
@@ -164,4 +164,32 @@ def createCommunity(request):
         userComm_ref2.set(postdata3)
 
         return Response(STATUS)
-    
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def fetchAllComm(request):
+    if request.method == 'GET':
+        comm_ref = dataRef.child('community/')
+        comm_data = comm_ref.get().val()
+
+        return Response(comm_data)
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def joinRequest(request):
+    if request.method == 'POST':
+        userId = request.data['userId']
+        commId = request.data['commId']
+        comm_ref = dataRef.child('community/'f'{commId}''/requests/')
+        try:
+            comm_data = comm_ref.get().val()
+            length = len(comm_data)
+        except:
+            length = 0
+        userRef = dataRef.child('user/'f'{userId}')
+        userdata = userRef.get().val()
+        comm_ref2 = dataRef.child('community/'f'{commId}''/requests/'f'{length}')
+        postdata = {'firstname': userdata['firstname'], 'lastname': userdata['lastname'], 'dept': userdata['dept'], 'major': userdata['major'], 'uni': userdata['university'], 'userId': userId}
+        comm_ref2.set(postdata)
+
+        return Response(STATUS)

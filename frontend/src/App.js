@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Random from "./components/Random";
 import Community from "./components/Community";
 import CreateComm from "./components/CreateComm";
+import JoinCommunity from "./components/JoinCommunity";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route exact path="/home" element={<Home/>} />
             <Route exact path="/community" element={<Community/>} />
             <Route exact path="/create-community" element={<CreateComm/>} />
+            <Route exact path="/join-community" element={<JoinCommunity/>} />
             <Route exact path="/sign-up" element={<SignUp/>} />
             </Routes>
         </div>

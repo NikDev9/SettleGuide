@@ -5,3 +5,5 @@ export const SIGNIN_URL = "http://localhost:8000/signin/";
 export const COMM_MSG_URL = "http://localhost:8000/channel/";
 export const SEND_MSG_URL = "http://localhost:8000/sendmsg/";
 export const CREATE_COMM_URL = "http://localhost:8000/createcomm/";
+export const ALL_COMM_URL = "http://localhost:8000/fetchallcomm/";
+export const JOIN_COMM_URL = "http://localhost:8000/joinrequest/";

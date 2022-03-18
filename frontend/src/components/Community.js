@@ -7,6 +7,7 @@ import { ListGroup } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import OutgoingMsg from './OutgoingMsg';
 import IncomingMsg from './IncomingMsg';
+import { useNavigate } from 'react-router-dom';
 
 const Community = () => {
 
@@ -18,17 +19,15 @@ const Community = () => {
   const [totalMsg, settotalMsg] = useState();
   const [show, setShow] = useState(false);
   const userId = Cookies.get("userId");
+  const nav = useNavigate();
 
   const fetchData = () => {
     const req = {"userId": Cookies.get("userId")};
     axios.post(COMM_URL, req)
     .then(res => {
-      //console.log('community', res.data);
       setCommData(res.data);
     });
   }
-
-  //fetchData();
 
   React.useEffect(() => {
     fetchData();
@@ -88,6 +87,10 @@ const Community = () => {
     });
   }
 
+  const openjoincommPage = () => {
+    nav('/join-community');
+  }
+
   const chatRoom = () => {
     console.log('chatroom')
     if(show) {
@@ -127,7 +130,7 @@ const Community = () => {
       console.log('chatroom2')
       return (
         <div class="mesgs">
-        <button className="joinComm" type="button">Click here to join community channels</button>
+        <button className="joinComm" type="button" onClick={() => openjoincommPage()}>Click here to join community channels</button>
       </div>
       );
     }
