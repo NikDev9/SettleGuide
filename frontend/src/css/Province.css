@@ -1,0 +1,25 @@
+.provDiv {
+    background: #6b5b95;
+    height: 100vh;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 30%;
+    padding-top: 10%;
+}
+.provDropdown {
+    margin-bottom: 5%;
+    width: 100%;
+    padding: 3%;
+    border: solid 2px;
+}
+.provHead {
+    color: white;
+    margin-bottom: 5%;
+}
+.next {
+    background: white;
+    color: #6b5b95;
+    width: 40%;
+    padding: 2%;
+    float: right;
+}

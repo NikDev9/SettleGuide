@@ -36,7 +36,7 @@ const SignUp = () => {
           Cookies.set("userId", res.data.userId);
           Cookies.set("firstname", res.data.name);
           Cookies.set("isAdmin", res.data.admin);
-          nav('/home')
+          nav('/province')
         }
         else {
           alert = true;

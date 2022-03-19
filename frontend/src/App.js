@@ -11,6 +11,8 @@ import Community from "./components/Community";
 import CreateComm from "./components/CreateComm";
 import JoinCommunity from "./components/JoinCommunity";
 import FetchUsers from "./components/FetchUsers";
+import Info from "./components/Info";
+import Province from "./components/Province";
 
 class App extends Component {
   render() {
@@ -24,6 +26,8 @@ class App extends Component {
             <Route exact path="/create-community" element={<CreateComm/>} />
             <Route exact path="/join-community" element={<JoinCommunity/>} />
             <Route exact path="/fetch-users" element={<FetchUsers/>} />
+            <Route exact path="/info" element={<Info/>} />
+            <Route exact path="/province" element={<Province/>} />
             <Route exact path="/sign-up" element={<SignUp/>} />
             </Routes>
         </div>

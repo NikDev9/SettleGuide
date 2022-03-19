@@ -55,14 +55,7 @@ const Community = () => {
       settotalMsg(res.data.messages.length);
       var objDiv = document.getElementById("msgDiv");
       objDiv.scrollTop = objDiv.scrollHeight;
-      //chatRoom();
     });
-    // .then(res => {
-    //   //const messages = useObservableSuspense(res.data.messages);
-    //   setMsg(res.data.messages);
-    //   //console.log('messages', messages.props.msg);
-    //   settotalMsg(res.data.messages.length);
-    // });
   }
 
   const showMsg = (msg) => {

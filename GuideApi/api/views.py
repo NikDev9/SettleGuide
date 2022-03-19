@@ -94,8 +94,9 @@ def UserData(request):
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def getHomeData(request):
-    if request.method == 'GET':
-        home_ref = dataRef.child('home/')
+    if request.method == 'POST':
+        province = request.data['prov']
+        home_ref = dataRef.child('home/'f'{province}')
         home_data = home_ref.get().val()
 
         return Response(home_data)
@@ -262,5 +263,17 @@ def rejectUser(request):
 
         comm2_ref = dataRef.child('community/'f'{chId}''/requests/'f'{reqId}')
         comm2_ref.update({'rejected': 1})
+
+        return Response(STATUS)
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def saveProvince(request):
+    if request.method == 'POST':
+        prov = request.data['prov']
+        userId = request.data['userId']
+
+        user_ref = dataRef.child('user/'f'{userId}')
+        user_ref.update({'province': prov})
 
         return Response(STATUS)

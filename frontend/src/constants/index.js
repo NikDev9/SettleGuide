@@ -11,3 +11,4 @@ export const FETCH_COMM_ADMIN_URL = "http://localhost:8000/fetchcommadmin/";
 export const FETCH_REQUESTS_URL = "http://localhost:8000/fetchrequests/";
 export const APPROVE_URL = "http://localhost:8000/approveuser/";
 export const REJECT_URL = "http://localhost:8000/rejectuser/";
+export const PROVINCE_URL = "http://localhost:8000/saveprovince/";
