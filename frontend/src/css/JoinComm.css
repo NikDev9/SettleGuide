@@ -40,6 +40,10 @@
     transition: all 0.6s ease-in-out;
 }
 
+.listhead {
+    margin-left: 4%;
+}
+
 .list-group-item:hover .check {
     opacity: 1;
 }

@@ -92,19 +92,8 @@ const Community = () => {
   }
 
   const chatRoom = () => {
-    console.log('chatroom')
     if(show) {
-      console.log('chatroom1')
       return (
-      // <div class="chatRoom">
-      //   <div className="room-chat">
-      //     <div className="message left">Hello</div>
-      //     <div className="message right">Hello</div>
-      //   </div>
-      //   <form>
-      //     <input className="input-chat" placeholder="Type a message" autoFocus={true} />
-      //   </form>
-      //   </div> 
       <div className="mesgs">
         <h3 className="channelHead">{channelName}</h3>
           <div className="msg_history" id="msgDiv">
@@ -127,10 +116,9 @@ const Community = () => {
     }
     else
     {
-      console.log('chatroom2')
       return (
         <div class="mesgs">
-        <button className="joinComm" type="button" onClick={() => openjoincommPage()}>Click here to join community channels</button>
+        <button className="joinComm" type="button" onClick={() => openjoincommPage()}>Want to join more communities?</button>
       </div>
       );
     }
@@ -141,7 +129,7 @@ const Community = () => {
         <Header/>
         <div className="container">
           <div className="appAside">
-            <h2 className="chnlHead">Your channels</h2> 
+            <h2 className="chnlHead">Your communities</h2> 
             <ListGroup>
               {comm.map((channel) =>
                 <ListGroup.Item action onClick={() => getChannelData(channel.channelId, channel.name)}>

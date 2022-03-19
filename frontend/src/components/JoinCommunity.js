@@ -39,8 +39,8 @@ const JoinCommunity = () => {
                 <ul class="list-group1 listGroup mt-5 text-white">
                     {comm.map((ch) =>
                     <li class="list-group-item listComm d-flex justify-content-between align-content-center">
-                        <div class="d-flex flex-row"> <img src="https://images.app.goo.gl/n1tVzERbiqC6RLhg9" width="40" />
-                            <div class="ml-2">
+                        <div class="d-flex flex-row"> <img height="50" width="50" src="https://i.pinimg.com/originals/43/9a/cf/439acfdbade09dd7208517d0838e1598.jpg" />
+                            <div class="ml-2 listhead">
                                 <h6 class="mb-0">{ch.name}</h6>
                                 <div class="about"><span>{ch.info}</span></div>
                             </div>

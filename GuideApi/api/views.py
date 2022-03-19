@@ -189,7 +189,78 @@ def joinRequest(request):
         userRef = dataRef.child('user/'f'{userId}')
         userdata = userRef.get().val()
         comm_ref2 = dataRef.child('community/'f'{commId}''/requests/'f'{length}')
-        postdata = {'firstname': userdata['firstname'], 'lastname': userdata['lastname'], 'dept': userdata['dept'], 'major': userdata['major'], 'uni': userdata['university'], 'userId': userId}
+        postdata = {'firstname': userdata['firstname'], 'lastname': userdata['lastname'], 'dept': userdata['dept'], 'major': userdata['major'], 'uni': userdata['university'], 'userId': userId, 'approved': 0, 'rejected': 0, 'reqId': length}
         comm_ref2.set(postdata)
+
+        return Response(STATUS)
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def fetchCommAdmin(request):
+    if request.method == 'POST':
+        userId = request.data['userId']
+        comm_ref = dataRef.child('community/')
+        comm_data = comm_ref.get().val()
+        adminData = []
+        postdata = []
+        for data in comm_data:
+            if data['adminId'] == userId:
+                adminData.append(data)
+        for data in adminData:
+            try:
+                data['requests']
+                postdata.append(data)
+            except:
+                continue
+
+        return Response(postdata)
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def fetchRequests(request):
+    if request.method == 'POST':
+        chId = request.data['chId']
+        comm_ref = dataRef.child('community/'f'{chId}''/requests/')
+        comm_data = comm_ref.get().val()
+        senddata = []
+        for data in comm_data:
+            if data['approved'] == 0 and data['rejected'] == 0:
+                senddata.append(data)
+
+        return Response(senddata)
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def approveUser(request):
+    if request.method == 'POST':
+        chId = request.data['chId']
+        reqId = request.data['reqId']
+        userId = request.data['userId']
+
+        comm_ref = dataRef.child('community/'f'{chId}/')
+        data = comm_ref.get().val()
+        chName = data['name']
+        info = data['info']
+        comm2_ref = dataRef.child('community/'f'{chId}''/requests/'f'{reqId}')
+        comm2_ref.update({'approved': 1})
+
+        postdata = {'channelId': chId, 'info': info, 'name': chName}
+        user_ref = dataRef.child('user/'f'{userId}''/community/')
+        userdata = user_ref.get().val()
+        length = len(userdata)
+        user_ref2 = dataRef.child('user/'f'{userId}''/community/'f'{length}')
+        user_ref2.set(postdata)
+
+        return Response(STATUS)
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def rejectUser(request):
+    if request.method == 'POST':
+        chId = request.data['chId']
+        reqId = request.data['reqId']
+
+        comm2_ref = dataRef.child('community/'f'{chId}''/requests/'f'{reqId}')
+        comm2_ref.update({'rejected': 1})
 
         return Response(STATUS)

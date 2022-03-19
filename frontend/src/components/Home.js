@@ -50,7 +50,9 @@ const Home = () => {
                         <Col>
                             <Card className="cardStyle" key={card.heading}>
                             <Card.Body>
-                                {/* <Card.Img src={card.img} /> */}
+                                <div className="cardimgdiv">
+                                    <Card.Img className="cardimg" src={card.link} />
+                                </div>
                                 <Card.Title>{card.heading}</Card.Title>
                                 <Card.Text>{card.info}
                                 </Card.Text>

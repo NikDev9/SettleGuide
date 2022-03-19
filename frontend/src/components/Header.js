@@ -35,13 +35,13 @@ const Header = () => {
                 <MDBNavbarLink className="item" href='/community'>Community</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink className="item" href='/create-community'>Create community</MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
                 <MDBNavbarLink className="item" href='/join-community'>Join a community</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink className="item" href='/approve-users'>Approve users</MDBNavbarLink>
+                <MDBNavbarLink className="item" href='/create-community'>Create community</MDBNavbarLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem>
+                <MDBNavbarLink className="item" href='/fetch-users'>Approve user requests</MDBNavbarLink>
               </MDBNavbarItem>
             </MDBNavbarNav>
           </div>

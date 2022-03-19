@@ -225,11 +225,19 @@ img{ max-width:100%;}
 
 .joinComm {
   color: white;
-  background: black;
-  position: relative;
-  left: 40%;
+  background: #6b5b95;
+  /* left: 40%;
   padding: 4%;
-  border-radius: 3%;
+  border-radius: 3%; */
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  cursor: pointer;
+  border-radius: 2px;
+  margin-top: 20%;
 }
 
 .channelHead {

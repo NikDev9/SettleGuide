@@ -7,3 +7,7 @@ export const SEND_MSG_URL = "http://localhost:8000/sendmsg/";
 export const CREATE_COMM_URL = "http://localhost:8000/createcomm/";
 export const ALL_COMM_URL = "http://localhost:8000/fetchallcomm/";
 export const JOIN_COMM_URL = "http://localhost:8000/joinrequest/";
+export const FETCH_COMM_ADMIN_URL = "http://localhost:8000/fetchcommadmin/";
+export const FETCH_REQUESTS_URL = "http://localhost:8000/fetchrequests/";
+export const APPROVE_URL = "http://localhost:8000/approveuser/";
+export const REJECT_URL = "http://localhost:8000/rejectuser/";

@@ -8,7 +8,7 @@
 .cardStyle {
     width: 80%;
     margin: 10%;
-    height: 40%;
+    height: 60%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 }
@@ -39,4 +39,15 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
+}
+
+.cardimgdiv {
+  height: 50%;
+  position: relative;
+}
+
+.cardimg {
+  object-fit: cover;
+  height: 100%;
+  width: 100px;
 }
