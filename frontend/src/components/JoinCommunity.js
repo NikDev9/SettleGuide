@@ -11,16 +11,18 @@ const JoinCommunity = () => {
     const userId = Cookies.get("userId");
     const [comm, setComm] = useState([]);
 
-    const fetchCommunity = () => {
-        axios.get(ALL_COMM_URL)
+    const fetchCommunity = async() => {
+        const req = {"userId": userId}
+        await axios.post(ALL_COMM_URL, req)
         .then(res => {
+            console.log('called');
             setComm(res.data);
         })
     }
 
     React.useEffect(() => {
         fetchCommunity();
-    });
+    }, []);
 
     const joinRequest = (id) => {
         console.log('hi');
@@ -30,25 +32,39 @@ const JoinCommunity = () => {
         .then(res => {
             alert('The request has been sent');
         })
+        fetchCommunity();
+    }
+
+    const showComm = () => {
+        if(comm != '') {
+            return (
+                <ul class="list-group1 listGroup mt-5 text-white">
+                    {comm.map((ch) =>
+                        <li class="list-group-item listComm d-flex justify-content-between align-content-center">
+                            <div class="d-flex flex-row"> <img height="50" width="50" src="https://i.pinimg.com/originals/43/9a/cf/439acfdbade09dd7208517d0838e1598.jpg" />
+                                <div class="ml-2 listhead">
+                                    <h6 class="mb-0">{ch.name}</h6>
+                                    <div class="about"><span>{ch.info}</span></div>
+                                </div>
+                            </div>
+                            <button class="joinbutton" onClick={() => joinRequest(ch.chId)}>Join</button>
+                        </li>
+                    )}
+                </ul>
+            );
+        }
+        else {
+            return (
+                <h2 className="noComm">Become a member of a community to get useful information.</h2>
+            );
+        }
     }
 
     return (
         <div>
             <Header />
             <div class="container1 d-flex justify-content-center">
-                <ul class="list-group1 listGroup mt-5 text-white">
-                    {comm.map((ch) =>
-                    <li class="list-group-item listComm d-flex justify-content-between align-content-center">
-                        <div class="d-flex flex-row"> <img height="50" width="50" src="https://i.pinimg.com/originals/43/9a/cf/439acfdbade09dd7208517d0838e1598.jpg" />
-                            <div class="ml-2 listhead">
-                                <h6 class="mb-0">{ch.name}</h6>
-                                <div class="about"><span>{ch.info}</span></div>
-                            </div>
-                        </div>
-                        <button class="joinbutton" onClick={() => joinRequest(ch.chId)}>Join</button>
-                    </li>
-                    )}
-                </ul>
+                {showComm()}
             </div>
         </div>
     );

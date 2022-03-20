@@ -170,11 +170,43 @@ def createCommunity(request):
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def fetchAllComm(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
+        userId = request.data['userId']
+        chId = []
+        response = []
         comm_ref = dataRef.child('community/')
         comm_data = comm_ref.get().val()
 
-        return Response(comm_data)
+        for data in comm_data:
+            addChannel = 1
+            if data['adminId'] == userId:
+                addChannel = 0
+                continue
+            else:
+                chId = data['chId']
+                try:  
+                    request_ref = dataRef.child('community/'f'{chId}''/requests')
+                    request_data = request_ref.get().val()
+                    for data1 in request_data:
+                        if(data1['userId'] == userId):
+                            addChannel = 0
+                            break
+                except:
+                    pass
+
+                try:
+                    member_ref = dataRef.child('community/'f'{chId}''/members')
+                    member_data = member_ref.get().val()
+                    for data2 in member_data:
+                        if(data2['memberId'] == userId):
+                            addChannel = 0
+                            break
+                except:
+                    pass
+                if bool(addChannel):
+                    response.append(data)
+
+    return Response(response)
 
 @api_view(['GET', 'POST'])
 @csrf_exempt
@@ -226,8 +258,11 @@ def fetchRequests(request):
         comm_data = comm_ref.get().val()
         senddata = []
         for data in comm_data:
-            if data['approved'] == 0 and data['rejected'] == 0:
-                senddata.append(data)
+            try:
+                if data['approved'] == 0 and data['rejected'] == 0:
+                    senddata.append(data)
+            except:
+                pass
 
         return Response(senddata)
 

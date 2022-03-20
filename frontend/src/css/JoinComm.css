@@ -1,6 +1,7 @@
 .container1 {
     background: #6b5b95;
     min-height: 100vh;
+    overflow-y: scroll;
 }
 
 .listGroup {
@@ -51,6 +52,12 @@
 .about span {
     font-size: 12px;
     margin-right: 10px;
+}
+
+.noComm {
+    color: white;
+    text-align: center;
+    margin-top: 15%;
 }
 
 /* input[type=checkbox] {

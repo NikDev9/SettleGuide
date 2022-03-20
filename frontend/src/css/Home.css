@@ -89,10 +89,17 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  padding: 2%;
   border: solid 5px;
   overscroll-behavior: none;
   overflow-y: scroll;
+}
+
+.react-chatbot-kit-chat-header {
+  font-weight: bold;
+}
+
+.react-chatbot-kit-chat-message-container {
+  padding: 2%;
 }
 
 .react-chatbot-kit-chat-input {

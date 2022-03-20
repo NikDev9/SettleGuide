@@ -252,3 +252,9 @@ img{ max-width:100%;}
 .username {
   font-weight: bold;
 }
+
+.noComm {
+  color: white;
+  text-align: center;
+  margin-top: 30%;
+}

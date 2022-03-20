@@ -64,18 +64,7 @@ const FetchUsers = () => {
       return (
         <div className="mesgs">
           <h3 className="channelHead">{channelName}</h3>
-          {requests.map((req, index) =>
-            <div id="fb">
-              <p><b>{req.firstname} {req.lastname}</b> <br/></p>
-              <p><b>Department: </b> <span>{req.dept}</span></p>
-              <p><b>Major: </b> <span>{req.major}</span></p>
-              <p><b>University/college: </b> <span>{req.uni}</span></p>
-              <div id="button-block">
-                  <div id="confirm" onClick={() => approve(index, req.userId)}>Approve</div>
-                  <div id="delete" onClick={() => reject(index, req.userId)}>Reject</div>
-              </div>
-            </div>
-          )}
+          {checkforReq()}
         </div>
       );
     }
@@ -88,6 +77,54 @@ const FetchUsers = () => {
     }
   }
 
+  const checkforReq = () => {
+    if(requests != '') {
+      return (
+        <div className="requests">
+        {requests.map((req, index) =>
+          <div id="fb">
+            <p><b>{req.firstname} {req.lastname}</b> <br/></p>
+            <p><b>Department: </b> <span>{req.dept}</span></p>
+            <p><b>Major: </b> <span>{req.major}</span></p>
+            <p><b>University/college: </b> <span>{req.uni}</span></p>
+            <div id="button-block">
+                <div id="confirm" onClick={() => approve(index, req.userId)}>Approve</div>
+                <div id="delete" onClick={() => reject(index, req.userId)}>Reject</div>
+            </div>
+          </div>
+        )}
+        </div>
+      );
+    }
+    else {
+      return (
+        <h3 className="noReq">No pending requests</h3>
+      );
+    }
+  }
+
+  const checkforChannels = () => {
+    if(data != '') {
+      return (
+        <div>
+        {data.map((dt) => 
+          <ListGroup.Item action onClick={() => selectComm(dt.chId, dt.name)}>
+            <div className="ms-2 me-auto">
+              <div className="fw-bold">{dt.name}</div>
+              {dt.info}
+            </div>
+          </ListGroup.Item>
+        )}
+        </div>
+      );
+    }
+    else {
+      return (
+        <h3 className="noComm">Create a community to view here</h3>
+      );
+    }
+  }
+
     return (
         <div>
           <Header/>
@@ -95,14 +132,7 @@ const FetchUsers = () => {
             <div className="appAside">
               <h2 className="chnlHead">Communities</h2> 
               <ListGroup>
-                {data.map((dt) => 
-                  <ListGroup.Item action onClick={() => selectComm(dt.chId, dt.name)}>
-                    <div className="ms-2 me-auto">
-                      <div className="fw-bold">{dt.name}</div>
-                      {dt.info}
-                    </div>
-                  </ListGroup.Item>
-                )}
+                {checkforChannels()}
               </ListGroup>
             </div>
             <div>

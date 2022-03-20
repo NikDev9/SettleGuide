@@ -29,12 +29,14 @@ const Login = (props) => {
 
     await axios.post(SIGNIN_URL, user)
     .then(res => {
-         Cookies.set("userId", res.data.userId);
-         Cookies.set("firstname", res.data.name);
-         Cookies.set("isAdmin", res.data.isAdmin); 
-         Cookies.set("province", res.data.province);     
-         if(Cookies.get('userId') != '')
-          nav('/home')
+      Cookies.set("userId", res.data.userId);
+      Cookies.set("firstname", res.data.name);
+      Cookies.set("isAdmin", res.data.isAdmin); 
+      Cookies.set("province", res.data.province);     
+      if(Cookies.get('userId') != '')
+        nav('/home')
+      else
+        alert('Your email or password is incorrect');
     })
   }
 

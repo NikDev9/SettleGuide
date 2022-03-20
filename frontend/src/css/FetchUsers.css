@@ -54,7 +54,7 @@
   #button-block{
     position:absolute;
     right:10px;
-    top:85px;
+    top:25%;
   }
   
   #button-block div{
@@ -86,6 +86,17 @@
 .msgheading {
   text-align: center;
   margin-top: 20%;
+}
+
+.noReq {
+  color: black;
+  margin-top: 20%;
+  text-align: center;
+}
+
+.requests {
+  overflow-y: scroll;
+  height: 100%;
 }
   
   

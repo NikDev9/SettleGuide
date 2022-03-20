@@ -41,6 +41,31 @@ const Community = () => {
     console.log('userMsg', userMsg);
   }
 
+  const showCommunityList = () => {
+
+    console.log('comm', comm);
+    if(comm != '') {
+      return (
+        <ListGroup>
+          {comm.map((channel) =>
+            <ListGroup.Item action onClick={() => getChannelData(channel.channelId, channel.name)}>
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">{channel.name}</div>
+                  {channel.info}
+              </div>
+            </ListGroup.Item>
+          )}
+        </ListGroup>
+      );
+    }
+    else {
+      return (
+        <h2 className="noComm">Become a member of a community to get useful information.</h2>
+      );
+    }
+
+  }
+
   const getChannelData = (id, name) => {
     setShow(true);
     console.log('channel data', id);
@@ -111,35 +136,26 @@ const Community = () => {
     {
       return (
         <div class="mesgs">
-        <button className="joinComm" type="button" onClick={() => openjoincommPage()}>Want to join more communities?</button>
+        <button className="joinComm" type="button" onClick={() => openjoincommPage()}>Want to join more communities? Click here</button>
       </div>
       );
     }
   }
 
-    return (
-        <div>
-        <Header/>
-        <div className="container">
-          <div className="appAside">
-            <h2 className="chnlHead">Your communities</h2> 
-            <ListGroup>
-              {comm.map((channel) =>
-                <ListGroup.Item action onClick={() => getChannelData(channel.channelId, channel.name)}>
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">{channel.name}</div>
-                    {channel.info}
-                  </div>
-                </ListGroup.Item>
-              )}
-            </ListGroup>
-          </div>
-          <div>
-            {chatRoom()}
-          </div>
+  return (
+    <div>
+      <Header/>
+      <div className="container">
+        <div className="appAside">
+          <h2 className="chnlHead">Your communities</h2> 
+          {showCommunityList()}
         </div>
+      <div>
+        {chatRoom()}
       </div>
-    );
-  }
+        </div>
+    </div>
+  );
+}
 
 export default Community;
