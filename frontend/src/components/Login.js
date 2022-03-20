@@ -31,10 +31,9 @@ const Login = (props) => {
     .then(res => {
          Cookies.set("userId", res.data.userId);
          Cookies.set("firstname", res.data.name);
-         Cookies.set("isAdmin", res.data.admin); 
+         Cookies.set("isAdmin", res.data.isAdmin); 
          Cookies.set("province", res.data.province);     
-         console.log('cookie login: ', Cookies.get("userId"));
-         if(res.data.userId != '')
+         if(Cookies.get('userId') != '')
           nav('/home')
     })
   }

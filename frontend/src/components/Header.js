@@ -16,6 +16,7 @@ import Cookies from 'js-cookie';
 const Header = () => {
 
   const nav = useNavigate();
+  const isAdmin = Cookies.get('isAdmin');
 
   const logout = () => {
     Cookies.remove('userId');
@@ -23,6 +24,26 @@ const Header = () => {
     Cookies.remove('firstname');
     Cookies.remove('isAdmin');
     nav('/');
+  }
+
+  const renderAdmin = () => {
+
+    if(isAdmin == 1) {
+      return (
+        <div className='collapse navbar-collapse' id='navbarExample01'>
+          <MDBNavbarItem>
+            <MDBNavbarLink className="item" href='/join-community'>Join a community</MDBNavbarLink>
+          </MDBNavbarItem>
+          <MDBNavbarItem>
+            <MDBNavbarLink className="item" href='/create-community'>Create community</MDBNavbarLink>
+          </MDBNavbarItem>
+          <MDBNavbarItem>
+            <MDBNavbarLink className="item" href='/fetch-users'>Approve user requests</MDBNavbarLink>
+          </MDBNavbarItem>
+        </div>
+      );
+    }
+    
   }
 
     return(
@@ -47,15 +68,7 @@ const Header = () => {
               <MDBNavbarItem>
                 <MDBNavbarLink className="item" href='/community'>Community</MDBNavbarLink>
               </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink className="item" href='/join-community'>Join a community</MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink className="item" href='/create-community'>Create community</MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem>
-                <MDBNavbarLink className="item" href='/fetch-users'>Approve user requests</MDBNavbarLink>
-              </MDBNavbarItem>
+                { renderAdmin() }
               <MDBNavbarItem className="itemRight">
                 <button className="logout" onClick={() => {logout()}}>Logout</button>
               </MDBNavbarItem>
