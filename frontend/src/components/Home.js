@@ -30,8 +30,11 @@ const Home = () => {
         fetchData();
     }, [])
 
-    const openInfo = () => {
-        nav('/info');
+    const openInfo = (content) => {
+        nav('/info', {
+            state: {
+            content: content }
+        });
     }
 
     return ( 
@@ -49,7 +52,7 @@ const Home = () => {
                                 <Card.Title>{card.heading}</Card.Title>
                                 <Card.Text>{card.shortinfo}
                                 </Card.Text>
-                                <button className="clickButton" onClick={() => openInfo()}>See more</button>
+                                <button className="clickButton" onClick={() => openInfo(card.content)}>See more</button>
                             </Card.Body>
                         </Card>
                     </Col>
