@@ -6,11 +6,24 @@ import {
     MDBNavbarLink,
     MDBNavbarToggler,
     MDBContainer,
-    MDBIcon
+    MDBIcon,
+    MDBBtn
   } from 'mdb-react-ui-kit';
 import '../css/Header.css';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const Header = () => {
+
+  const nav = useNavigate();
+
+  const logout = () => {
+    Cookies.remove('userId');
+    Cookies.remove('province');
+    Cookies.remove('firstname');
+    Cookies.remove('isAdmin');
+    nav('/');
+  }
 
     return(
       <header>
@@ -42,6 +55,9 @@ const Header = () => {
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <MDBNavbarLink className="item" href='/fetch-users'>Approve user requests</MDBNavbarLink>
+              </MDBNavbarItem>
+              <MDBNavbarItem className="itemRight">
+                <button className="logout" onClick={() => {logout()}}>Logout</button>
               </MDBNavbarItem>
             </MDBNavbarNav>
           </div>

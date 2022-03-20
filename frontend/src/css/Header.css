@@ -11,3 +11,19 @@
 .item {
     color: white;
 }
+
+.itemRight {
+    position: absolute;
+    right: 1%;
+}
+
+.logout {
+    background-color: white;
+    color:#6b5b95;
+    margin-top: 5%;
+}
+
+.logout:hover {
+    background-color: #6b5b95;
+    color: white;
+}
