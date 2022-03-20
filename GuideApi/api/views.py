@@ -54,7 +54,8 @@ def signIn(request):
         user_data = users_ref.get().val()
         name = user_data['firstname']
         admin = user_data['isAdmin']
-        return Response({"userId": uid, "name": name, "isAdmin": admin})
+        province = user_data['province']
+        return Response({"userId": uid, "name": name, "isAdmin": admin, "province": province})
     except:
         return Response({"userId":''})
 
@@ -275,5 +276,15 @@ def saveProvince(request):
 
         user_ref = dataRef.child('user/'f'{userId}')
         user_ref.update({'province': prov})
+
+        return Response(STATUS)
+
+@api_view(['GET', 'POST'])
+@csrf_exempt
+def saveProvince(request):
+    if request.method == 'POST':
+        userId = request.data['userId']
+
+        user_ref = dataRef.child('user/'f'{userId}')
 
         return Response(STATUS)

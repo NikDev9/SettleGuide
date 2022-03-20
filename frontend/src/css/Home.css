@@ -1,6 +1,6 @@
 .Home {
     background: #6b5b95;
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
     flex-wrap: wrap;
 }
@@ -50,4 +50,69 @@
   object-fit: cover;
   height: 100%;
   width: 100px;
+}
+
+.react-chatbot-kit-user-avatar {
+  height: 10%;
+  width: 6%;
+  /* float: left; */
+}
+
+.react-chatbot-kit-user-chat-message {
+  /* float: right; */
+  margin-top: 4%;
+}
+
+.react-chatbot-kit-user-chat-message-container {
+  float: right;
+  width: 50%;
+  background: #6b5b95;
+  padding: 2%;
+  margin-top: 4%;
+}
+
+.react-chatbot-kit-chat-bot-message-container {
+  /* float: left; */
+  width: fit-content;
+  margin-top: 4%;
+  padding: 2%;
+}
+
+.react-chatbot-kit-chat-bot-avatar {
+  float: left;
+}
+
+.bot {
+  background: white;
+  height: 70%;
+  width: 40%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 2%;
+  border: solid 5px;
+  overscroll-behavior: none;
+  overflow-y: scroll;
+}
+
+.react-chatbot-kit-chat-input {
+  position: sticky;
+  bottom: 0;
+  width: 95%;
+}
+
+.react-chatbot-kit-chat-btn-send {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.react-chatbot-kit-chat-header {
+  background-color: lightgrey;
+  padding: 2%;
+  border: solid 1px;
+  position: sticky;
+}
+
+.react-chatbot-kit-chat-message-container {
 }

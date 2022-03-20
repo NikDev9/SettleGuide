@@ -8,6 +8,10 @@ import axios from 'axios';
 import { HOME_URL } from "../constants";
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import Chatbot from 'react-chatbot-kit';
+import ActionProvider from './ActionProvider';
+import MessageParser from './MessageParser';
+import config from './Config';
 
 const Home = () => {
 
@@ -33,6 +37,7 @@ const Home = () => {
     return ( 
         <div>
             <Header/>
+            {/* <Chatbot /> */}
             <div className="Home">
                 {homeData.map((card) => 
                     <Col>
@@ -49,6 +54,12 @@ const Home = () => {
                         </Card>
                     </Col>
                 )}
+                <div className="bot">
+                    {/* <header className="App-header"> */}
+                    <Chatbot config={config} actionProvider={ActionProvider} messageParser={MessageParser} />
+      {/* </header> */}
+                </div>
+                {/* <Chatboto /> */}
             </div>
         </div>
     );
