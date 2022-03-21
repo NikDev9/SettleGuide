@@ -6,9 +6,8 @@ import {
     MDBNavbarLink,
     MDBNavbarToggler,
     MDBContainer,
-    MDBIcon,
-    MDBBtn
-  } from 'mdb-react-ui-kit';
+    MDBIcon
+} from 'mdb-react-ui-kit';
 import '../css/Header.css';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
@@ -31,9 +30,6 @@ const Header = () => {
     if(isAdmin == 1) {
       return (
         <div className='collapse navbar-collapse' id='navbarExample01'>
-          <MDBNavbarItem>
-            <MDBNavbarLink className="item" href='/join-community'>Join a community</MDBNavbarLink>
-          </MDBNavbarItem>
           <MDBNavbarItem>
             <MDBNavbarLink className="item" href='/create-community'>Create community</MDBNavbarLink>
           </MDBNavbarItem>
@@ -68,7 +64,10 @@ const Header = () => {
               <MDBNavbarItem>
                 <MDBNavbarLink className="item" href='/community'>Community</MDBNavbarLink>
               </MDBNavbarItem>
-                { renderAdmin() }
+              <MDBNavbarItem>
+                <MDBNavbarLink className="item" href='/join-community'>Join a community</MDBNavbarLink>
+              </MDBNavbarItem>
+              { renderAdmin() }
               <MDBNavbarItem className="itemRight">
                 <button className="logout" onClick={() => {logout()}}>Logout</button>
               </MDBNavbarItem>

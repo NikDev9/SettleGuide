@@ -1,35 +1,35 @@
 .Login {
-    display: flex;
-    color: white;
-    background: #6b5b95;
-    background-image: url("../images/students.jpg"), linear-gradient(to right, blue, pink);
-  }
-  
-  .appAside {
-    width: 50%;
-    background-color: #6b5b95;
-  }
-  
-  .appForm {
-    background-color: #12130f;
-    padding: 25px 40px;
-    overflow: auto;
-  }
+  display: flex;
+  color: white;
+  background: #6b5b95;
+  background-image: url("../images/students.jpg"), linear-gradient(to right, blue, pink);
+}
 
-  .loginHeading {
-    text-align: center;
-    margin-bottom: 30%;
-  }
+.appAside {
+  width: 50%;
+  background-color: #6b5b95;
+}
 
-  .buttonM {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.appForm {
+  background-color: #12130f;
+  padding: 25px 40px;
+  overflow: auto;
+}
 
-  .textCenter {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center; 
-  }
+.loginHeading {
+  text-align: center;
+  margin-bottom: 30%;
+}
+
+.buttonM {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.textCenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; 
+}

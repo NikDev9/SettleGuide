@@ -8,7 +8,6 @@ import Cookies from 'js-cookie';
 
 const SignUp = () => {
 
-  var alert = false;
   const nav = useNavigate();
     const [user, setUser] = useState({
       email: "",
@@ -23,14 +22,9 @@ const SignUp = () => {
 
   const dept = ['Arts and Sciences', 'Engineering', 'Fine arts', 'Business', 'Education', 'Communication', 'Health sciences', 'Social Work', 'Theatre'];
 
-  const fetchData = async() => {
+  const fetchData = () => {
 
-    // await axios.get(USER_URL)
-    //   .then(res => {
-    //     console.log(res.data)
-    //   })
-
-    await axios.post(USER_URL, user)
+    axios.post(USER_URL, user)
     .then(res => {
         if(res.data.userId != '') {
           Cookies.set("userId", res.data.userId);
@@ -38,18 +32,9 @@ const SignUp = () => {
           Cookies.set("isAdmin", res.data.admin);
           nav('/province')
         }
-        else {
-          alert = true;
-          showAlert();
-        }
+        else
+          alert("The account already exists");
     })
-  }
-
-  const showAlert = () => {
-    console.log('alert function');
-    if(alert) {
-      alert("The account already exists");
-    }
   }
 
   const handleChange = (event) => {
@@ -166,13 +151,10 @@ const SignUp = () => {
           <div className="formField">
             <button className="formFieldButton buttonM">Sign Up</button>{" "}
           </div>
-          <Link to="/sign-in" className="formFieldLink textCenter">
+          <Link to="/" className="formFieldLink textCenter">
             I'm already member
           </Link>
         </form>
-        <div>
-          {showAlert()}
-          </div>
       </div>
       </div>
       </div>

@@ -22,7 +22,9 @@ const Province = () => {
         console.log('req', req);
         axios.post(PROVINCE_URL, req)
         .then(res => {
-            nav('/home')
+            nav('/home', { state: {
+                province: prov }
+            });
         });
     }
 
@@ -33,6 +35,7 @@ const Province = () => {
               {/* {dept.map((dt) =>  */}
               <option value="none" selected disabled hidden>Select an option</option>
               <option value="Saskatchewan">Saskatchewan</option>
+              <option value="Alberta">Alberta</option>
               {/* )} */}
             </select>
             <button className="next" onClick={() => saveProvince()}>Next</button>

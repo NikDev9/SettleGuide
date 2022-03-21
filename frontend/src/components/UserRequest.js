@@ -4,9 +4,9 @@ import Header from './Header';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { FETCH_REQUESTS_URL, FETCH_COMM_ADMIN_URL, APPROVE_URL, REJECT_URL } from '../constants';
-import '../css/FetchUsers.css';
+import '../css/UserRequest.css';
 
-const FetchUsers = () => {
+const UserRequest = ({}) => {
 
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
@@ -19,7 +19,6 @@ const FetchUsers = () => {
       axios.post(FETCH_COMM_ADMIN_URL, req)
       .then(res => {
         setData(res.data);
-        console.log('requests123456:', res.data);
       });
   }
 
@@ -103,7 +102,7 @@ const FetchUsers = () => {
     }
   }
 
-  const checkforChannels = () => {
+  const checkforCommunities = () => {
     if(data != '') {
       return (
         <div>
@@ -132,7 +131,7 @@ const FetchUsers = () => {
             <div className="appAside">
               <h2 className="chnlHead">Communities</h2> 
               <ListGroup>
-                {checkforChannels()}
+                {checkforCommunities()}
               </ListGroup>
             </div>
             <div>
@@ -143,4 +142,4 @@ const FetchUsers = () => {
     );
 }
 
-export default FetchUsers;
+export default UserRequest;

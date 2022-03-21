@@ -86,11 +86,6 @@ def UserData(request):
             return Response({'userId': userId, 'name': firstname, 'isAdmin': 0})
         except:
             return Response({'userId': ''})
-        # users_ref.update({
-        #     'username': f"{username}",
-        #     'email': f"{email}",
-        #     'password': f"{password}"
-        # }) 
             
 @api_view(['GET', 'POST'])
 @csrf_exempt

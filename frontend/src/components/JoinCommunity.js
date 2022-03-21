@@ -15,7 +15,6 @@ const JoinCommunity = () => {
         const req = {"userId": userId}
         await axios.post(ALL_COMM_URL, req)
         .then(res => {
-            console.log('called');
             setComm(res.data);
         })
     }
