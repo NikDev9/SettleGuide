@@ -5,6 +5,7 @@ class MessageParser {
     }
   
     parse(message) {
+
         const lowerCaseMessage = message.toLowerCase()
     
         if (lowerCaseMessage.includes("hello") || lowerCaseMessage.includes("hi") || lowerCaseMessage.includes("hey"))
@@ -15,6 +16,8 @@ class MessageParser {
           this.actionProvider.bank()
         else if(lowerCaseMessage.includes("document") || lowerCaseMessage.includes("documents") || lowerCaseMessage.includes("id") || lowerCaseMessage.includes("ids"))
           this.actionProvider.doc()
+        else if(lowerCaseMessage.includes("community") || lowerCaseMessage.includes("communities"))
+          this.actionProvider.comm()
         else
           this.actionProvider.random()
     }

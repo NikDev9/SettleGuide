@@ -8,7 +8,7 @@
 .cardStyle {
     width: 80%;
     margin: 10%;
-    height: 60%;
+    height: 70%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 }
@@ -37,49 +37,49 @@
   color: white;
   background: #6b5b95;
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .cardimgdiv {
   height: 50%;
   position: relative;
+  margin-bottom: 5%;
+  border: solid 2px black;
 }
 
 .cardimg {
   object-fit: cover;
   height: 100%;
-  width: 100px;
+  /* width: 100px; */
 }
 
 .react-chatbot-kit-user-avatar {
-  height: 10%;
-  width: 6%;
-  /* float: left; */
+  float: left;
 }
 
 .react-chatbot-kit-user-chat-message {
   /* float: right; */
-  margin-top: 4%;
+  /* margin-top: 4%; */
 }
 
 .react-chatbot-kit-user-chat-message-container {
-  float: right;
-  width: 50%;
   background: #6b5b95;
+  width: 70%;
   padding: 2%;
   margin-top: 4%;
+  margin-left: 25%;
 }
 
 .react-chatbot-kit-chat-bot-message-container {
-  /* float: left; */
-  width: fit-content;
   margin-top: 4%;
-  padding: 2%;
+}
+
+.react-chatbot-kit-chat-bot-message {
+  width: 70%;
+  padding: 4%;
 }
 
 .react-chatbot-kit-chat-bot-avatar {
-  float: left;
+  /* float: left; */
 }
 
 .bot {
@@ -90,7 +90,7 @@
   bottom: 0;
   right: 0;
   border: solid 5px;
-  overscroll-behavior: none;
+  /* overscroll-behavior: none; */
   overflow-y: scroll;
 }
 
@@ -118,8 +118,44 @@
   background-color: lightgrey;
   padding: 2%;
   border: solid 1px;
-  position: sticky;
+  width: -webkit-fill-available;
 }
 
-.react-chatbot-kit-chat-message-container {
+.react-chatbot-kit-chat-bot-avatar {
+  margin-right: 2%;
+  background-color: grey;
+  padding: 2%;
+  float: left;
+}
+
+.react-chatbot-kit-chat-input-container {
+  position: fixed;
+  bottom: 0;
+  width: 95%;
+}
+
+.botbutton {
+  /* position: fixed;
+  bottom: 0;
+  background-color: white;
+  color: #6b5b95; */
+
+  padding:0px 0px 0px 0px;
+    text-align: center;
+    margin:0px;
+    width: 160px;
+    height:40px;
+    background: black;
+    color: white;
+    z-index:15;
+    border-radius: 5px 5px 0px 0px;
+    -moz-transform:rotate(-90deg);
+    -ms-transform:rotate(-90deg);
+    -o-transform:rotate(-90deg);
+    -webkit-transform:rotate(-90deg);
+    transform-origin: bottom right;
+    position: fixed;
+    right: 0px;
+    top: 35%;
+    border: solid 5px;
 }

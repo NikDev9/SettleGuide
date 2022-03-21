@@ -10,9 +10,10 @@ import JoinCommunity from "./components/JoinCommunity";
 import UserRequest from "./components/UserRequest";
 import Info from "./components/Info";
 import Province from "./components/Province";
+import Cookies from "js-cookie";
 
-class App extends Component {
-  render() {
+const App = () => {
+
     return (
       <Router>
         <div className="App">
@@ -31,6 +32,5 @@ class App extends Component {
       </Router>
     );
   }
-}
 
 export default App;

@@ -35,7 +35,7 @@ class ActionProvider {
 
     handleHouseList = () => {
         const message = this.createChatBotMessage(
-          "Fantastic, some of the popular websites for finding affordable accomofdations are given below. To get more detailed information, you can also check our housing card on the main page.",
+          "Fantastic, some of the popular websites for finding affordable accomodations are given below. To get more detailed information, you can also check our housing card on the main page.",
           {
             widget: "HousingLinks",
           },
@@ -66,6 +66,17 @@ class ActionProvider {
         this.updateChatbotState(message);
     };
 
+    handleComm = () => {
+      const message = this.createChatBotMessage(
+        "You can become a member of various communities to discuss and get valuable information.",
+        {
+          widget: "CommunityLinks",
+        },
+      );
+  
+      this.updateChatbotState(message);
+    }
+
     house() {
         this.handleHouseList();
     }
@@ -77,6 +88,11 @@ class ActionProvider {
     doc() {
         this.handleDocList();
     }
+
+    comm() {
+        this.handleComm();
+    }
+
  }
 
  export default ActionProvider;

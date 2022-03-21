@@ -6,7 +6,7 @@ const LearningOptions = (props) => {
     { text: "Housing", handler: props.actionProvider.handleHouseList, id: 1 },
     { text: "Banking", handler: props.actionProvider.handleBankList, id: 2 },
     { text: "Important documents", handler: props.actionProvider.handleDocList, id: 3 },
-    { text: "Connect with people", handler: () => {}, id: 4},
+    { text: "Connecting with people", handler: props.actionProvider.handleComm, id: 4},
   ];
 
   const optionsMarkup = options.map((option) => (

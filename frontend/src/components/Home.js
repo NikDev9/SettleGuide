@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import { HOME_URL } from "../constants";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Chatbot from 'react-chatbot-kit';
 import ActionProvider from './ActionProvider';
@@ -27,12 +27,9 @@ const Home = () => {
         catch {
             prov = Cookies.get('province');
         }
-        console.log('prov', prov)
         const req = {'prov': prov};
-        console.log('home: province: ',req)
         axios.post(HOME_URL, req)
         .then(res => {
-            console.log('res data', res.data);
             setHomeData(res.data);
         });
     }
@@ -46,6 +43,26 @@ const Home = () => {
             state: {
             content: content }
         });
+    }
+
+    const closeBot = () => {
+        const targetDiv = document.getElementById("guidebot");
+        const button = document.getElementById("botBtn");
+        if (targetDiv.style.display !== "none") {
+            targetDiv.style.display = "none";
+            button.textContent = "Open Guide Bot";
+          } else {
+            targetDiv.style.display = "block";
+            button.textContent = "Close Guide Bot";
+          }
+    }
+
+    const handleChange = (event) => {
+        console.log('called');
+        // var objDiv = document.getElementById("guidebot");
+        // objDiv.scrollTop = objDiv.scrollHeight;
+        // var chat = document.getElementsByClassName('react-chatbot-kit-chat-container');
+        // chat.scrollTop = chat.scrollHeight;
     }
 
     const showData = () => {
@@ -75,15 +92,12 @@ const Home = () => {
     return ( 
         <div>
             <Header/>
-            {/* <Chatbot /> */}
             <div className="Home">
                 {showData()}
-                <div className="bot">
-                    {/* <header className="App-header"> */}
+                <div className="bot" id="guidebot" onChange={handleChange}>
                     <Chatbot config={config} actionProvider={ActionProvider} messageParser={MessageParser} />
-      {/* </header> */}
                 </div>
-                {/* <Chatboto /> */}
+                <button className="botbutton" id="botBtn" onClick={() => closeBot()}>Close Guide Bot</button>
             </div>
         </div>
     );

@@ -7,7 +7,7 @@ const Config = {
     initialMessages: [createChatBotMessage(`Hi, I'm here to help. What are you looking for?`, {widget: "learningOptions",})],
     customStyles: {
         botMessageBox: {
-          backgroundColor: "#6b5b95",
+          backgroundColor: "lightgrey",
         },
         chatButton: {
           backgroundColor: "#6b5b95",
@@ -81,7 +81,7 @@ const Config = {
                 id: 2,
               },
               {
-                text: "Co-op work permit if you wish to do co-op",
+                text: "Co-op work permit if you wish to opt for co-op",
                 id: 3,
               },
               {
