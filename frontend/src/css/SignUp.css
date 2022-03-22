@@ -2,6 +2,7 @@
   display: flex;
   color: white;
   background: #6b5b95;
+  background-image: url("../images/students.jpg"), linear-gradient(to right, blue, pink);
 }
   
 .appAside {

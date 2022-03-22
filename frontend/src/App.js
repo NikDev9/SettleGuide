@@ -11,6 +11,10 @@ import UserRequest from "./components/UserRequest";
 import Info from "./components/Info";
 import Province from "./components/Province";
 import Cookies from "js-cookie";
+import axios from 'axios';
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 const App = () => {
 

@@ -96,7 +96,11 @@
 
 .requests {
   overflow-y: scroll;
-  height: 100%;
+  height: 100vh;
+}
+
+.item:active {
+  background-color: white;
 }
   
   
