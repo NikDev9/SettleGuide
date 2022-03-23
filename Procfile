@@ -1,3 +1,3 @@
-release: python manage.py migrate
+release: python GuideApi/manage.py migrate
 web: gunicorn --chdir GuideApi.wsgi --log-file -
-web: python manage.py runserver 0.0.0.0:$PORT
+web: python GuideApi/manage.py runserver 0.0.0.0:$PORT
