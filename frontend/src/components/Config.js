@@ -102,7 +102,31 @@ const Config = {
                 },
               ],
             },
+        },
+        {
+          widgetName: "AllLinks",
+          widgetFunc: (props) => <LinkList {...props} />,
+          props: {
+            options: [
+              {
+                text: "Connecting with people",
+                id: 1,
+              },
+              {
+                text: "Information regarding housing",
+                id: 2,
+              },
+              {
+                text: "Ids or documents you'd need to live in Canada",
+                id: 3,
+              },
+              {
+                text: "Information regarding banking",
+                id: 4,
+              },
+            ],
           },
+        },
     ],
 }
 

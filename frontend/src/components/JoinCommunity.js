@@ -5,7 +5,6 @@ import Header from "./Header";
 import '../css/JoinComm.css';
 import Community from "./Community";
 import Cookies from "js-cookie";
-import ReactLoading from 'react-loading';
 
 const JoinCommunity = () => {
 
@@ -14,11 +13,9 @@ const JoinCommunity = () => {
 
     const fetchCommunity = async() => {
         const req = {"userId": userId}
-        callLoader(comm);
         await axios.post(ALL_COMM_URL, req)
         .then(res => {
             setComm(res.data);
-            callLoader(comm);
         })
     }
 
@@ -26,18 +23,7 @@ const JoinCommunity = () => {
         fetchCommunity();
     }, []);
 
-    const callLoader = (data) => {
-        console.log('data', data);
-        if(data == '') {
-            console.log('no data');
-            return (<ReactLoading height={667} width={375} />);
-        }
-        else
-            return (<></>);
-    }
-
     const joinRequest = (id) => {
-        console.log('hi');
         const req = {"userId": userId, "commId": id};
         console.log('req: ', req);
         axios.post(JOIN_COMM_URL, req)
@@ -67,7 +53,7 @@ const JoinCommunity = () => {
         }
         else {
             return (
-                <h2 className="noComm">Become a member of a community to get useful information.</h2>
+                <h2 className="noComm">Become a member of a community to get useful information. Loading...Please Wait</h2>
             );
         }
     }

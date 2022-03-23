@@ -20,9 +20,9 @@ class ActionProvider {
     }
 
     random() {
-        const greetingMessage = this.createChatBotMessage("You can request to join various community to answer your questions.",
+        const greetingMessage = this.createChatBotMessage("Sorry, I didn't understand your question. Here are some things I can help you with:",
             {
-                widget: "CommunityLinks",
+                widget: "AllLinks",
             },)
         this.updateChatbotState(greetingMessage)
     }
