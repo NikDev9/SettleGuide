@@ -7,15 +7,18 @@ import '../css/Province.css';
 
 const Province = () => {
 
+    //getter setter for province
     const [prov, setProv] = useState("");
     const nav = useNavigate();
 
+    //sets province on selection from the dropdown
     const handleChange = (event) => {
         let target = event.target;
         let value = target.value;
         setProv(value);
     }
 
+    //Calls API to save province for the currently logged in user.
     const saveProvince = () => {
         Cookies.set("province", prov);
         const req = {'prov': prov, 'userId': Cookies.get('userId')};
@@ -28,6 +31,7 @@ const Province = () => {
         });
     }
 
+    //renders the page with the dropdown
     return (
         <div className="provDiv">
             <h1 className="provHead">Select province</h1>

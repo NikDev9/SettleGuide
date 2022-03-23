@@ -21,14 +21,17 @@ const Community = () => {
   const userId = Cookies.get("userId");
   const nav = useNavigate();
 
+  //fetches all the communities that the user is member of
   const fetchData = () => {
     const req = {"userId": Cookies.get("userId")};
     axios.post(COMM_URL, req)
     .then(res => {
+      //setter for variable comm
       setCommData(res.data);
     });
   }
 
+  //used for calling the function once
   React.useEffect(() => {
     fetchData();
   }, [])
@@ -37,13 +40,13 @@ const Community = () => {
     let target = event.target;
     let value = target.value;
 
+    //sets variable message and stores the recent message sent by the user
     setuserMsg(value);
-    console.log('userMsg', userMsg);
   }
 
+  //renders the community list, implements iterator pattern in javascript. Also calls function to fetch a community's messages when clicked
   const showCommunityList = () => {
 
-    console.log('comm', comm);
     if(comm != '') {
       return (
         <ListGroup>
@@ -66,16 +69,15 @@ const Community = () => {
 
   }
 
+  //fetches community's messages and sets show to true so that the messages can be displayed
   const getChannelData = (id, name) => {
     setShow(true);
-    console.log('channel data', id);
-    console.log('show', show);
     const req = {"id": id};
     setChannel(id);
     setChannelName(name);
     axios.post(COMM_MSG_URL, req)
     .then(
-      res => {console.log('comm_msg', res.data.messages);
+      res => {
       setMsg(res.data.messages);
       settotalMsg(res.data.messages.length);
       var objDiv = document.getElementById("msgDiv");
@@ -85,21 +87,22 @@ const Community = () => {
 
   const showMsg = (msg) => {
 
+    //if the current message in the iterator is not the user's message then show as incoming message
     if(msg.userId != userId)
       return <IncomingMsg msg={msg.msg} time={msg.time} username={msg.username} />;
     else
+      //otherwise call outgoingMsg component
       return <OutgoingMsg msg={msg.msg} time={msg.time} />;
   }
 
+  //sends message to database by calling API
   const sendMsg = () => {
     const d = new Date();
     var time = d.getHours() + ':' + d.getMinutes();
     var name = Cookies.get('firstname');
     const req = {'msg': userMsg, 'channel': channel, 'totalMsg': totalMsg, 'time': time, 'name': name, 'userId': userId};
-    console.log('req', req);
     axios.post(SEND_MSG_URL, req)
     .then(res => {
-      console.log('message sent');
       setuserMsg('');
       getChannelData(channel, channelName);
     });
@@ -109,6 +112,7 @@ const Community = () => {
     nav('/join-community');
   }
 
+  //renders messages of a community
   const chatRoom = () => {
     if(show) {
       return (
@@ -142,6 +146,7 @@ const Community = () => {
     }
   }
 
+  //this is the first thing that is rendered when this page is opened. It calls showCommunityList to display community list 
   return (
     <div>
       <Header/>

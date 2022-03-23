@@ -11,6 +11,7 @@ const CreateComm = () => {
     const nav = useNavigate();
     const userId = Cookies.get("userId");
     const username = Cookies.get("name");
+    //community object
     const [comm, setComm] = useState({
         "name": "",
         "msg": "",
@@ -20,36 +21,37 @@ const CreateComm = () => {
         "time": ""
     });
 
+    //calls django API to save the newly created API. After the creation is successful, user is navigated to another page
     const create = () => {
         const d = new Date();
         var time = d.getHours() + ':' + d.getMinutes();
         setComm({'time': time});
-        console.log('Created', comm);
         axios.post(CREATE_COMM_URL, comm)
         .then(res => {
-            console.log('Created');
             nav('/community');
         })
     }
 
+    //called as soon as there is a change in user input
     const handleChange = (event) => {
         let target = event.target;
         let name = target.name;
         let value = target.value;
     
+        //sets values of keys of the comm variable 
         setComm({
             ...comm,
             [name]: value
-          });
-        console.log('comm', comm);
+        });
     }
 
+    //called when the form is submitted and calls create() to create the community
     const handleSubmit = (event) => {
         event.preventDefault();
         create();
-        console.log('handleSubmit');
     }
 
+    //page rendering
     return (
         <div>
             <Header />

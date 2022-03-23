@@ -1,5 +1,6 @@
 import '../css/Community.css';
 
+//renders community message on the right side in the community chat
 function OutgoingMsg(props) {
 
     return (

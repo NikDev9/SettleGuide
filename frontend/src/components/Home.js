@@ -15,10 +15,12 @@ import config from './Config';
 
 const Home = () => {
 
+    //getter setter for page content
     const [homeData, setHomeData] = useState([]);
     const nav = useNavigate();
     const location = useLocation();
 
+    //fetches data for home page by calling django API
     const fetchData = () => {
         var prov;
         try {
@@ -38,6 +40,7 @@ const Home = () => {
         fetchData();
     })
 
+    //called by clicking on an information card and opens new page that displays more info. Sends content to another component using props.
     const openInfo = (content) => {
         nav('/info', {
             state: {
@@ -45,6 +48,7 @@ const Home = () => {
         });
     }
 
+    //toggles between closing and opening Guide Bot 
     const closeBot = () => {
         const targetDiv = document.getElementById("guidebot");
         const button = document.getElementById("botBtn");
@@ -57,14 +61,7 @@ const Home = () => {
           }
     }
 
-    const handleChange = (event) => {
-        console.log('called');
-        // var objDiv = document.getElementById("guidebot");
-        // objDiv.scrollTop = objDiv.scrollHeight;
-        // var chat = document.getElementsByClassName('react-chatbot-kit-chat-container');
-        // chat.scrollTop = chat.scrollHeight;
-    }
-
+    //renders content on the page
     const showData = () => {
         if(homeData) {
             return (
@@ -89,12 +86,13 @@ const Home = () => {
         }
     }
 
+    //renders chatbot and calls showData() to render page contents
     return ( 
         <div>
             <Header/>
             <div className="Home">
                 {showData()}
-                <div className="bot" id="guidebot" onChange={handleChange}>
+                <div className="bot" id="guidebot">
                     <Chatbot config={config} actionProvider={ActionProvider} messageParser={MessageParser} />
                 </div>
                 <button className="botbutton" id="botBtn" onClick={() => closeBot()}>Close Guide Bot</button>

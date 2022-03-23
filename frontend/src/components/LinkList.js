@@ -2,6 +2,7 @@ import React from "react";
 
 import "../css/LinkList.css";
 
+//navigates user to different links provided in the answer by the chatbot
 const LinkList = (props) => {
   const linkMarkup = props.options.map((link) => (
     <li key={link.id} className="link-list-item">

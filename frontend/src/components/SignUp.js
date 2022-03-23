@@ -9,7 +9,8 @@ import Cookies from 'js-cookie';
 const SignUp = () => {
 
   const nav = useNavigate();
-    const [user, setUser] = useState({
+  //getter setter for user object
+  const [user, setUser] = useState({
       email: "",
       password: "",
       firstname: "",
@@ -20,8 +21,9 @@ const SignUp = () => {
       isAdmin: 0
     });
 
-  const dept = ['Arts and Sciences', 'Engineering', 'Fine arts', 'Business', 'Education', 'Communication', 'Health sciences', 'Social Work', 'Theatre'];
+  const dept = ['Arts', 'Engineering', 'Science', 'Business', 'Education', 'Communication', 'Medicine', 'Social Work'];
 
+  //calls API to send new user's data to store in the database
   const fetchData = () => {
 
     axios.post(USER_URL, user)
@@ -37,6 +39,7 @@ const SignUp = () => {
     })
   }
 
+  //sets user object when there's any change in the user input
   const handleChange = (event) => {
     let target = event.target;
     let value = target.value;
@@ -48,12 +51,13 @@ const SignUp = () => {
     });
   }
 
+  //calls fetchData() on form submit
   const handleSubmit = (e) => {
-
     e.preventDefault();
     fetchData();
-    console.log('handleSubmit', user);
   }
+
+    //renders signup page
     return (
       <div className="SignUp">
       <div className="appForm">

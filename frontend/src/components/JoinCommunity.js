@@ -3,7 +3,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import Header from "./Header";
 import '../css/JoinComm.css';
-import Community from "./Community";
 import Cookies from "js-cookie";
 
 const JoinCommunity = () => {
@@ -11,6 +10,7 @@ const JoinCommunity = () => {
     const userId = Cookies.get("userId");
     const [comm, setComm] = useState([]);
 
+    //Suggests communities that the user is not part of
     const fetchCommunity = async() => {
         const req = {"userId": userId}
         await axios.post(ALL_COMM_URL, req)
@@ -23,9 +23,9 @@ const JoinCommunity = () => {
         fetchCommunity();
     }, []);
 
+    //calls API to send user's join request
     const joinRequest = (id) => {
         const req = {"userId": userId, "commId": id};
-        console.log('req: ', req);
         axios.post(JOIN_COMM_URL, req)
         .then(res => {
             alert('The request has been sent');
@@ -33,6 +33,7 @@ const JoinCommunity = () => {
         fetchCommunity();
     }
 
+    //renders list of communities. Calls joinRequest() when user clicks on join button
     const showComm = () => {
         if(comm != '') {
             return (
@@ -58,6 +59,7 @@ const JoinCommunity = () => {
         }
     }
 
+    //calls showComm() to render communities
     return (
         <div>
             <Header />

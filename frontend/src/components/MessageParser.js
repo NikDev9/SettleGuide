@@ -4,6 +4,7 @@ class MessageParser {
       this.state = state;
     }
   
+    //parses user's message in the chat bot
     parse(message) {
 
         const lowerCaseMessage = message.toLowerCase()

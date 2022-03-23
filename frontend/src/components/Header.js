@@ -15,8 +15,10 @@ import Cookies from 'js-cookie';
 const Header = () => {
 
   const nav = useNavigate();
+  //it is determined from the stored cookie whether the user is an admin or not
   const isAdmin = Cookies.get('isAdmin');
 
+  //logs out the user and destroys all the cookies
   const logout = () => {
     Cookies.remove('userId');
     Cookies.remove('province');
@@ -25,8 +27,10 @@ const Header = () => {
     nav('/');
   }
 
+  //determines which links have to be shown to the user
   const renderAdmin = () => {
 
+    //rendered only when user is an admin
     if(isAdmin == 1) {
       return (
         <div className='collapse navbar-collapse' id='navbarExample01'>
@@ -42,7 +46,8 @@ const Header = () => {
     
   }
 
-    return(
+  //rendered everytime  
+  return(
       <header>
       <MDBNavbar expand='lg' light bgColor='white'>
         <MDBContainer fluid>

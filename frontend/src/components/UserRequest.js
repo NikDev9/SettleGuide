@@ -8,12 +8,14 @@ import '../css/UserRequest.css';
 
 const UserRequest = ({}) => {
 
+  //getter setters
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
   const [channelName, setchName] = useState("");
   const [channelId, setchId] = useState();
   const [requests, setReq] = useState([]);
   
+  //fetches admin's communities
   const fetchData = () => {
     const req = {"userId": Cookies.get("userId")};
       axios.post(FETCH_COMM_ADMIN_URL, req)
@@ -26,6 +28,7 @@ const UserRequest = ({}) => {
     fetchData();
   }, [])
 
+  //calls API to fetch that particular community's user join requests
   const selectComm = (chId, name) => {
     setShow(true);
     setchName(name);
@@ -34,30 +37,30 @@ const UserRequest = ({}) => {
     axios.post(FETCH_REQUESTS_URL, req)
       .then(res => {
         setReq(res.data);
-        console.log('fetch', res.data);
         for(let i=0; i<res.data.length; i++)
           requests.push(res.data[i].requests);
     });
   }
   
+  //calls API to approve a user request
   const approve = (reqId, uid) => {
     const data = {"chId": channelId, "reqId": reqId, "userId": uid}
     axios.post(APPROVE_URL, data)
       .then(res => {
         selectComm(channelId, channelName);
-        console.log(res.data);
     });
   }
 
+  //calls API to reject a user request
   const reject = (reqId, uid) => {
     const data = {"chId": channelId, "reqId": reqId, "userId": uid}
     axios.post(REJECT_URL, data)
       .then(res => {
         selectComm(channelId, channelName);
-        console.log(res.data);
     });
   }
 
+  //calls function to render user requests
   const showUsers = () => {
     if(show) {
       return (
@@ -76,6 +79,7 @@ const UserRequest = ({}) => {
     }
   }
 
+  //renders user requests. Implements iterator
   const checkforReq = () => {
     if(requests != '') {
       return (
@@ -102,6 +106,7 @@ const UserRequest = ({}) => {
     }
   }
 
+  //iterator to display communities list
   const checkforCommunities = () => {
     if(data != '') {
       return (
@@ -123,7 +128,7 @@ const UserRequest = ({}) => {
       );
     }
   }
-
+    //function calls to render all parts of the component
     return (
         <div>
           <Header/>

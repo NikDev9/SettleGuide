@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/LearningOptions.css";
 
+//calls functions in actionProvider to provide appropriate reply to user's input
 const LearningOptions = (props) => {
   const options = [
     { text: "Housing", handler: props.actionProvider.handleHouseList, id: 1 },

@@ -2,6 +2,7 @@ import '../css/Community.css';
 
 const IncomingMsg = ({msg, time, username}) => {
 
+    //renders message on the left side of the chat
     return (
         <div className="incoming_msg">
           <div className="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" /> </div>

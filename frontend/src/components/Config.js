@@ -2,6 +2,7 @@ import { createChatBotMessage } from "react-chatbot-kit";
 import LearningOptions from "./LearningOptions";
 import LinkList from "./LinkList";
 
+//includes initial message of chatbot and widgets that will be shown along with varios replies that Guide Bot might give to a user
 const Config = {
     botName: "Guide Bot",
     initialMessages: [createChatBotMessage(`Hi, I'm here to help. What are you looking for?`, {widget: "learningOptions",})],
