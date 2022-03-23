@@ -7,10 +7,19 @@ For more information on this file, see
 https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/
 """
 
-import os
+import os, sys
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'GuideApi.settings')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GuideApi.settings.production")
+
+# if os.environ.get("DJANGO_SETTINGS_MODULE") == "GuideApi.settings.production":
+#     from raven.contrib.django.raven_compat.middleware.wsgi import Sentry
+#     application = Sentry(get_wsgi_application())
+# else:
+#     get_wsgi_application()
+
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'GuideApi.settings')
 
 application = get_wsgi_application()
